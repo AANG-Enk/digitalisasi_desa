@@ -68,7 +68,7 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item active">
+        <li class="menu-item {{ request()->segment(1) == 'dashboard' ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons ri-home-smile-line"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
@@ -78,7 +78,7 @@
 
         @if (auth()->user()->can('User Access') || auth()->user()->can('Role Access') || auth()->user()->can('Permission Access'))
 
-            <li class="menu-item">
+            <li class="menu-item {{ (request()->segment(1) == 'users' || request()->segment(1) == 'roles' || request()->segment(1) == 'permissions') ? 'open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ri-group-line"></i>
                     <div data-i18n="Administrator">Administrator</div>
@@ -86,21 +86,21 @@
 
                 <ul class="menu-sub">
                     @if (auth()->user()->can('User Access'))
-                        <li class="menu-item">
+                        <li class="menu-item {{ request()->segment(1) == 'users' ? 'active' : '' }}">
                             <a href="{{ route('users.index') }}" class="menu-link">
                             <div data-i18n="Users Management">Users Management</div>
                             </a>
                         </li>
                     @endif
                     @if (auth()->user()->can('Role Access'))
-                        <li class="menu-item">
+                        <li class="menu-item {{ request()->segment(1) == 'roles' ? 'active' : '' }}">
                             <a href="{{ route('roles.index') }}" class="menu-link">
                             <div data-i18n="Roles">Roles</div>
                             </a>
                         </li>
                     @endif
                     @if (auth()->user()->can('Permission Access'))
-                        <li class="menu-item">
+                        <li class="menu-item {{ request()->segment(1) == 'permissions' ? 'active' : '' }}">
                             <a href="{{ route('permissions.index') }}" class="menu-link">
                             <div data-i18n="Permission">Permission</div>
                             </a>

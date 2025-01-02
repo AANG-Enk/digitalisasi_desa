@@ -1,9 +1,9 @@
 <?php
 
 namespace Database\Seeders;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $superadmin = User::create([
+            'username'          => 'admin.desa',
+            'name'              => 'Admin Desa',
+            'email'             => 'admin.desa@gmail.com',
+            'password'          => Hash::make('#4dm1n.D3s4#'),
+            'email_verified_at' => \Carbon\Carbon::now(),
+        ]);
     }
 }

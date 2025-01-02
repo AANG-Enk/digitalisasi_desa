@@ -80,28 +80,28 @@
 
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ri-group-line"></i>
+                    <i class="menu-icon tf-icons ri-group-line"></i>
                     <div data-i18n="Administrator">Administrator</div>
                 </a>
 
                 <ul class="menu-sub">
                     @if (auth()->user()->can('User Access'))
                         <li class="menu-item">
-                            <a href="#" class="menu-link">
+                            <a href="{{ route('users.index') }}" class="menu-link">
                             <div data-i18n="Users Management">Users Management</div>
                             </a>
                         </li>
                     @endif
                     @if (auth()->user()->can('Role Access'))
                         <li class="menu-item">
-                            <a href="#" class="menu-link">
+                            <a href="{{ route('roles.index') }}" class="menu-link">
                             <div data-i18n="Roles">Roles</div>
                             </a>
                         </li>
                     @endif
                     @if (auth()->user()->can('Permission Access'))
                         <li class="menu-item">
-                            <a href="#" class="menu-link">
+                            <a href="{{ route('permissions.index') }}" class="menu-link">
                             <div data-i18n="Permission">Permission</div>
                             </a>
                         </li>

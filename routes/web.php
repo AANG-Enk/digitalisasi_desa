@@ -17,8 +17,14 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::middleware(['web'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard.index');
-    })->name('dashboard');
+Route::middleware(['web','auth','verified','banned'])->group(function () {
+    Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+    // User
+    Route::get('/banned/{users}',[App\Http\Controllers\UserController::class, 'banned'])->name('users.banned');
+    Route::get('/unbanned/{users}',[App\Http\Controllers\UserController::class, 'unbanned'])->name('users.unbanned');
+
+    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::resource('permissions', App\Http\Controllers\PermissionController::class);
 });

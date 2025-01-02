@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Role;
+use App\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -107,6 +108,43 @@ class RoleController extends Controller
             Role::where('id',$role->id)->delete();
             DB::commit();
             return redirect()->route('roles.index')->with('success','Berhasil menghapus role '.$nama);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'status'    => false,
+                'message'   => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function permission_index(Role $roles)
+    {
+        $permissions = Permission::all();
+        $action = route('role.permission.store',$roles->id);
+        return view('role.permission',compact('permissions','roles','action'));
+    }
+
+    public function permission_store(Request $request, Role $roles)
+    {
+
+        $nama = $roles->name;
+        try {
+            DB::beginTransaction();
+
+            foreach ($roles->permissions as $permission) {
+                if (!in_array($permission['id'], $request->permission)) {
+                    $permission = Permission::find($permission['id']);
+                    $roles->revokePermissionTo($permission);
+                }
+            }
+
+            foreach ($request->permission as $permission_id) {
+                $permission = Permission::find($permission_id);
+                $roles->givePermissionTo($permission['name']);
+            }
+
+            DB::commit();
+            return redirect()->route('roles.index')->with('success','Berhasil sinkronisasi permission role '.$nama);
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([

@@ -49,6 +49,7 @@
                                 <div class="d-flex gap-1">
                                     @can('Role Update')
                                         <a href="{{ route('roles.edit',$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit {{ $item->name }}" class="text-secondary"><i class="menu-icon tf-icons ri-edit-2-line"></i></a>
+                                        <a href="{{ route('role.permission.index',$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sinkronisasi Permission Role {{ $item->name }}" class="text-success"><i class="menu-icon tf-icons ri-refresh-line"></i></a>
                                     @endcan
                                     @can('Role Delete')
                                         <form method="post" action="{{ route('roles.destroy',$item->id) }}" id="form-delete-{{ $loop->iteration }}" class="d-inline">

@@ -21,8 +21,15 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
     Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
     // User
-    Route::get('/banned/{users}',[App\Http\Controllers\UserController::class, 'banned'])->name('users.banned');
-    Route::get('/unbanned/{users}',[App\Http\Controllers\UserController::class, 'unbanned'])->name('users.unbanned');
+    Route::prefix('users/{users}')->group(function () {
+        Route::get('/banned',[App\Http\Controllers\UserController::class, 'banned'])->name('users.banned');
+        Route::get('/unbanned',[App\Http\Controllers\UserController::class, 'unbanned'])->name('users.unbanned');
+    });
+
+    Route::prefix('role/{roles}')->group(function () {
+        Route::get('/permission',[App\Http\Controllers\RoleController::class, 'permission_index'])->name('role.permission.index');
+        Route::post('/permission',[App\Http\Controllers\RoleController::class, 'permission_store'])->name('role.permission.store');
+    });
 
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::resource('roles', App\Http\Controllers\RoleController::class);

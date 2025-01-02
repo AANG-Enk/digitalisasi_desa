@@ -115,9 +115,9 @@
                                 <input class="form-check-input" type="checkbox" id="remember-me" />
                                 <label class="form-check-label" for="remember-me"> Ingat Saya </label>
                             </div>
-                                <a href="auth-forgot-password-basic.html" class="float-end mb-1 mt-2">
+                            {{-- <a href="auth-forgot-password-basic.html" class="float-end mb-1 mt-2">
                                 <span>Lupa Password?</span>
-                            </a>
+                            </a> --}}
                         </div>
                         <div class="mb-5">
                             @if (session('error'))

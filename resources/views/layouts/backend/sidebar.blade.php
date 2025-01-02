@@ -72,7 +72,7 @@
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons ri-home-smile-line"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
-                <div class="badge bg-danger rounded-pill ms-auto">5</div>
+                {{-- <div class="badge bg-danger rounded-pill ms-auto">5</div> --}}
             </a>
         </li>
 

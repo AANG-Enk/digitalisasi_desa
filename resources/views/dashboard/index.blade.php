@@ -13,7 +13,7 @@
             <div class="d-flex align-items-end row">
                 <div class="col-md-6 order-2 order-md-1">
                     <div class="card-body">
-                        <h4 class="card-title mb-4">Selamat Data Di<span class="fw-bold"> Digitalisasi Desa</span> 🎉</h4>
+                        <h4 class="card-title mb-4">Selamat Datang Di<span class="fw-bold"> Digitalisasi Desa</span></h4>
                         <p class="mb-0">Silakan jelajahi fitur kami seperti layanan online, informasi potensi desa, dan berita terkini.</p>
                         <p>Nikmati pengalaman baru dalam pelayanan desa digital! 🌟</p>
                     </div>

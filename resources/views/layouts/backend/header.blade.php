@@ -306,7 +306,7 @@
                     </div>
                     <div class="flex-grow-1">
                     <span class="fw-medium d-block small">{{ auth()->user()->name }}</span>
-                    <small class="text-muted">Admin</small>
+                    <small class="text-muted">{{ auth()->user()->roles()->first()->name }}</small>
                     </div>
                 </div>
                 </a>

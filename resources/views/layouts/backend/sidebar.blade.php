@@ -76,79 +76,126 @@
             </a>
         </li>
 
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons ri-group-line"></i>
-                <div data-i18n="Administrator">Administrator</div>
-            </a>
+        @if (auth()->user()->can('User Access') || auth()->user()->can('Role Access') || auth()->user()->can('Permission Access'))
 
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Users Management">Users Management</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Roles">Roles</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Permission">Permission</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ri-group-line"></i>
+                    <div data-i18n="Administrator">Administrator</div>
+                </a>
 
-        <!-- Edukasi -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons ri-community-line"></i>
-                <div data-i18n="Edukasi">Edukasi</div>
-            </a>
+                <ul class="menu-sub">
+                    @if (auth()->user()->can('User Access'))
+                        <li class="menu-item">
+                            <a href="#" class="menu-link">
+                            <div data-i18n="Users Management">Users Management</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('Role Access'))
+                        <li class="menu-item">
+                            <a href="#" class="menu-link">
+                            <div data-i18n="Roles">Roles</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('Permission Access'))
+                        <li class="menu-item">
+                            <a href="#" class="menu-link">
+                            <div data-i18n="Permission">Permission</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
 
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Data Warga">Data Warga</div>
-                    </a>
-                </li>
+        @endif
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Info RW">Info RW</div>
-                    </a>
-                </li>
+        @if (
+            auth()->user()->can('Data Warga Access') ||
+            auth()->user()->can('Info RW Access') ||
+            auth()->user()->can('Berita RW Access') ||
+            auth()->user()->can('Berita RW Kategori Access') ||
+            auth()->user()->can('Lapor RW Access') ||
+            auth()->user()->can('Tanya RW Access') ||
+            auth()->user()->can('Survei RW Access')
+        )
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Berita RW">Berita RW</div>
-                    </a>
-                </li>
+            <!-- Edukasi -->
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ri-community-line"></i>
+                    <div data-i18n="Edukasi">Edukasi</div>
+                </a>
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Lapor RW">Lapor RW</div>
-                    </a>
-                </li>
+                <ul class="menu-sub">
+                    @if (auth()->user()->can('Data Warga Access'))
+                        <li class="menu-item">
+                            <a href="#" class="menu-link">
+                            <div data-i18n="Data Warga">Data Warga</div>
+                            </a>
+                        </li>
+                    @endif
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Tanya RW">Tanya RW</div>
-                    </a>
-                </li>
+                    @if (auth()->user()->can('Info RW Access'))
+                        <li class="menu-item">
+                            <a href="#" class="menu-link">
+                            <div data-i18n="Info RW">Info RW</div>
+                            </a>
+                        </li>
+                    @endif
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Survei RW">Survei RW</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+                    @if (auth()->user()->can('Berita RW Kategori Access') && auth()->user()->can('Berita RW Access'))
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <div data-i18n="Berita RW">Berita RW</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a href="#" class="menu-link">
+                                      <div data-i18n="Kategori">Kategori</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" class="menu-link">
+                                      <div data-i18n="Berita">Berita</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="menu-item">
+                            <a href="#" class="menu-link">
+                            <div data-i18n="Berita RW">Berita RW</div>
+                            </a>
+                        </li>
+                    @endif
+
+
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                        <div data-i18n="Lapor RW">Lapor RW</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                        <div data-i18n="Tanya RW">Tanya RW</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                        <div data-i18n="Survei RW">Survei RW</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        @endif
 
         <!-- Diskusi -->
-        <li class="menu-item">
+        {{-- <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons ri-discuss-line"></i>
                 <div data-i18n="Diskusi">Diskusi</div>
@@ -185,10 +232,10 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
         <!-- Solusi -->
-        <li class="menu-item">
+        {{-- <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons ri-lightbulb-flash-line"></i>
                 <div data-i18n="Solusi">Solusi</div>
@@ -213,6 +260,7 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
+
     </ul>
 </aside>

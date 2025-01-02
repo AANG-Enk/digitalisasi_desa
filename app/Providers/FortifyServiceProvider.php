@@ -83,7 +83,7 @@ class FortifyServiceProvider extends ServiceProvider
 
             $loginField = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' :(is_numeric($request->username) ? 'nik' : 'username');
 
-            if(!User::where($loginField, $request->username)->first){
+            if(!User::where($loginField, $request->username)->first()){
                 session()->flash('error', 'User tidak ditemukan.');
                 return redirect()->back();
             }

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+
+use App\Imports\DataWargaMultipleSheetImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataWargaController extends Controller
 {
@@ -146,5 +149,26 @@ class DataWargaController extends Controller
                 'message'   => $th->getMessage(),
             ], 500);
         }
+    }
+
+
+    public function import_index()
+    {
+        $action = route('datawarga.import.store');
+        return view('warga.import',compact('action'));
+    }
+
+    public function import_store(Request $request)
+    {
+        $request->validate([
+            'file'  => 'required|mimes:xls,xlsx|max:1024',
+        ],[
+            'file.required' => 'File Excel harus dimasukkan',
+            'file.mimes'    => 'File Excel tidak valid',
+            'file.max'      => 'File Excel Maximal 1mb',
+        ]);
+
+        Excel::import(new DataWargaMultipleSheetImport, $request->file('file'));
+        return redirect()->route('datawarga.index')->with('success','Berhasil mengimport data warga file excel');
     }
 }

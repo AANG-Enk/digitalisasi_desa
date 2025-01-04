@@ -57,6 +57,18 @@ class PermissionRolesSeeder extends Seeder
             'Data Warga Update|Administrator|RW',
             'Data Warga Delete|Administrator|RW',
 
+            // Info RW
+            'Info RW Access|Administrator|RW',
+            'Info RW Create|Administrator|RW',
+            'Info RW Update|Administrator|RW',
+            'Info RW Delete|Administrator|RW',
+
+            // Layanan Surat
+            'Layanan Surat Access|Administrator|RW',
+            'Layanan Surat Create|Administrator|RW',
+            'Layanan Surat Update|Administrator|RW',
+            'Layanan Surat Delete|Administrator|RW',
+
             // Berita RW Kategori
             'Berita RW Kategori Access|Administrator|RW',
             'Berita RW Kategori Create|Administrator|RW',

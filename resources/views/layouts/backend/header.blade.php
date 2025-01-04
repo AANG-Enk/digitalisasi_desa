@@ -7,8 +7,11 @@
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <ul class="navbar-nav flex-row align-items-center ms-auto">
+        <li class="nav-item me-4 me-xl-1">
+            <button class="btn btn-danger btn-lg">SOS Button</button>
+        </li>
         <!-- Notification -->
-        <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-4 me-xl-1">
+        {{-- <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-4 me-xl-1">
             <a
             class="nav-link btn btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
             href="javascript:void(0);"
@@ -256,7 +259,7 @@
                     </div>
                 </li>
             </ul>
-        </li>
+        </li> --}}
         <!--/ Notification -->
 
         <!-- User -->

@@ -173,7 +173,7 @@
 
 
                     <li class="menu-item {{ request()->segment(1) == 'laporrw' ? 'active' : '' }}">
-                        <a href="#" class="menu-link">
+                        <a href="{{ route('laporrw.index') }}" class="menu-link">
                         <div data-i18n="Lapor RW">Lapor RW</div>
                         </a>
                     </li>

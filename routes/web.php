@@ -45,4 +45,9 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
 
     Route::resource('kategoriberita', App\Http\Controllers\KategoriBeritaController::class);
     Route::resource('berita', App\Http\Controllers\BeritaController::class);
+
+    Route::prefix('laporrw')->group(function () {
+        Route::get('dibaca/{laporrw:slug}',[App\Http\Controllers\LaporRwController::class, 'dibaca'])->name('laporrw.dibaca');
+    });
+    Route::resource('laporrw', App\Http\Controllers\LaporRwController::class);
 });

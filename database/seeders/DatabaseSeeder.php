@@ -24,16 +24,6 @@ class DatabaseSeeder extends Seeder
 
         $administrator->assignRole('Administrator');
 
-        $kelurahan = User::create([
-            'username'          => 'admin.kelurahan',
-            'name'              => 'Admin Kelurahan',
-            'email'             => 'admin.kelurahan@gmail.com',
-            'password'          => Hash::make('#4dm1n.D3s4#'),
-            'email_verified_at' => \Carbon\Carbon::now(),
-        ]);
-
-        $kelurahan->assignRole('Kelurahan');
-
         $rw = User::create([
             'username'          => 'admin.rw',
             'name'              => 'Admin RW',
@@ -42,16 +32,6 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => \Carbon\Carbon::now(),
         ]);
 
-        $rw->assignRole('Ketua RW');
-
-        $rt = User::create([
-            'username'          => 'admin.rt',
-            'name'              => 'Admin RT',
-            'email'             => 'admin.rt@gmail.com',
-            'password'          => Hash::make('#4dm1n.D3s4#'),
-            'email_verified_at' => \Carbon\Carbon::now(),
-        ]);
-
-        $rt->assignRole('Ketua RT');
+        $rw->assignRole('RW');
     }
 }

@@ -21,16 +21,8 @@ class PermissionRolesSeeder extends Seeder
             'name'  => 'Administrator'
         ]);
 
-        $kelurahan = Role::create([
-            'name'  => 'Kelurahan'
-        ]);
-
         $ketua_rw = Role::create([
-            'name'  => 'Ketua RW'
-        ]);
-
-        $ketua_rt = Role::create([
-            'name'  => 'Ketua RT'
+            'name'  => 'RW'
         ]);
 
         $warga = Role::create([
@@ -60,40 +52,40 @@ class PermissionRolesSeeder extends Seeder
             'Permission Delete|Administrator',
 
             // Data Warga
-            'Data Warga Access|Administrator|Kelurahan|Ketua RW|Ketua RT',
-            'Data Warga Create|Administrator|Kelurahan|Ketua RW|Ketua RT',
-            'Data Warga Update|Administrator|Kelurahan|Ketua RW|Ketua RT',
-            'Data Warga Delete|Administrator|Kelurahan|Ketua RW|Ketua RT',
+            'Data Warga Access|Administrator|RW',
+            'Data Warga Create|Administrator|RW',
+            'Data Warga Update|Administrator|RW',
+            'Data Warga Delete|Administrator|RW',
 
             // Berita RW Kategori
-            'Berita RW Kategori Access|Administrator|Kelurahan|Ketua RW|Ketua RT',
-            'Berita RW Kategori Create|Administrator|Kelurahan|Ketua RW|Ketua RT',
-            'Berita RW Kategori Update|Administrator|Kelurahan|Ketua RW|Ketua RT',
-            'Berita RW Kategori Delete|Administrator|Kelurahan|Ketua RW|Ketua RT',
+            'Berita RW Kategori Access|Administrator|RW',
+            'Berita RW Kategori Create|Administrator|RW',
+            'Berita RW Kategori Update|Administrator|RW',
+            'Berita RW Kategori Delete|Administrator|RW',
 
             // Berita RW
-            'Berita RW Access|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Berita RW Create|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Berita RW Update|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Berita RW Delete|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
+            'Berita RW Access|Administrator|RW|Warga',
+            'Berita RW Create|Administrator|RW|Warga',
+            'Berita RW Update|Administrator|RW|Warga',
+            'Berita RW Delete|Administrator|RW|Warga',
 
             // Lapor RW
-            'Lapor RW Access|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Lapor RW Create|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Lapor RW Update|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Lapor RW Delete|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
+            'Lapor RW Access|Administrator|RW|Warga',
+            'Lapor RW Create|Administrator|RW|Warga',
+            'Lapor RW Update|Administrator|RW|Warga',
+            'Lapor RW Delete|Administrator|RW|Warga',
 
             // Tanya RW
-            'Tanya RW Access|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Tanya RW Create|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Tanya RW Update|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Tanya RW Delete|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
+            'Tanya RW Access|Administrator|RW|Warga',
+            'Tanya RW Create|Administrator|RW|Warga',
+            'Tanya RW Update|Administrator|RW|Warga',
+            'Tanya RW Delete|Administrator|RW|Warga',
 
             // Survei RW
-            'Survei RW Access|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Survei RW Create|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Survei RW Update|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
-            'Survei RW Delete|Administrator|Kelurahan|Ketua RW|Ketua RT|Warga',
+            'Survei RW Access|Administrator|RW|Warga',
+            'Survei RW Create|Administrator|RW|Warga',
+            'Survei RW Update|Administrator|RW|Warga',
+            'Survei RW Delete|Administrator|RW|Warga',
         ];
 
         foreach($list_permission as $val){
@@ -115,16 +107,6 @@ class PermissionRolesSeeder extends Seeder
 
             if(isset($val_array[3])){
                 $role = Role::where('name',$val_array[3])->first();
-                $role->givePermissionTo($val_array[0]);
-            }
-
-            if(isset($val_array[4])){
-                $role = Role::where('name',$val_array[4])->first();
-                $role->givePermissionTo($val_array[0]);
-            }
-
-            if(isset($val_array[5])){
-                $role = Role::where('name',$val_array[5])->first();
                 $role->givePermissionTo($val_array[0]);
             }
         }

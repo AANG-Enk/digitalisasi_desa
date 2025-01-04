@@ -39,9 +39,7 @@
                     <th>Kategori</th>
                     <th>Ditayangkan</th>
                     <th>Pin</th>
-                    @canany(['Berita RW Update','Berita RW Delete'])
-                        <th>Aksi</th>
-                    @endcanany
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,22 +54,21 @@
                         <td>{{ $item->kategori->judul }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->published_at)->isoFormat('DD-MMMM-YYYY') }}</td>
                         <td>{!! ($item->pin)?'<span class="badge bg-success">Ya</span>':'<span class="badge bg-danger">Tidak</span>' !!}</td>
-                        @canany(['Berita RW Update','Berita RW Delete'])
-                            <td>
-                                <div class="d-flex gap-1">
-                                    @can('Berita RW Update')
-                                        <a href="{{ route('berita.edit',$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit {{ $item->name }}" class="text-secondary"><i class="menu-icon tf-icons ri-edit-2-line"></i></a>
-                                    @endcan
-                                    @can('Berita RW Delete')
-                                        <form method="post" action="{{ route('berita.destroy',$item->id) }}" id="form-delete-{{ $loop->iteration }}" class="d-inline">
-                                            @csrf
-                                            @method('delete')
-                                            <a href="javascript:void(0)" onclick="Swal.fire({ title: 'Apakah kamu yakin?', text: 'Hapus Berita, data tidak bisa dikembalikkan', icon: 'warning', showCancelButton: true, confirmButtonText: 'Ya, Hapus', customClass: { confirmButton: 'btn btn-primary me-3 waves-effect waves-light', cancelButton: 'btn btn-outline-secondary waves-effect' },}).then((willDelete) => { if (willDelete.value) { document.getElementById('form-delete-{{ $loop->iteration }}').submit(); } });" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete {{ $item->name }}" class="text-danger"><i class="menu-icon tf-icons ri-delete-bin-line"></i></a>
-                                        </form>
-                                    @endcan
-                                </div>
-                            </td>
-                        @endcanany
+                        <td>
+                            <div class="d-flex gap-1">
+                                <a href="{{ route('berita.show',$item->slug) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Detail {{ $item->name }}" class="text-success"><i class="menu-icon tf-icons ri-eye-line"></i></a>
+                                @can('Berita RW Update')
+                                    <a href="{{ route('berita.edit',$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit {{ $item->name }}" class="text-secondary"><i class="menu-icon tf-icons ri-edit-2-line"></i></a>
+                                @endcan
+                                @can('Berita RW Delete')
+                                    <form method="post" action="{{ route('berita.destroy',$item->id) }}" id="form-delete-{{ $loop->iteration }}" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <a href="javascript:void(0)" onclick="Swal.fire({ title: 'Apakah kamu yakin?', text: 'Hapus Berita, data tidak bisa dikembalikkan', icon: 'warning', showCancelButton: true, confirmButtonText: 'Ya, Hapus', customClass: { confirmButton: 'btn btn-primary me-3 waves-effect waves-light', cancelButton: 'btn btn-outline-secondary waves-effect' },}).then((willDelete) => { if (willDelete.value) { document.getElementById('form-delete-{{ $loop->iteration }}').submit(); } });" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete {{ $item->name }}" class="text-danger"><i class="menu-icon tf-icons ri-delete-bin-line"></i></a>
+                                    </form>
+                                @endcan
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

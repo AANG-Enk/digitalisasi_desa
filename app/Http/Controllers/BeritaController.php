@@ -74,9 +74,10 @@ class BeritaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Berita $beritum)
+    public function show($slug)
     {
-        //
+        $berita = Berita::where('slug',$slug)->firstOrFail();
+        return view('berita.detail',compact('berita'));
     }
 
     /**

@@ -122,7 +122,7 @@
         )
 
             <!-- Edukasi -->
-            <li class="menu-item {{ (request()->segment(1) == 'datawarga' || request()->segment(1) == 'inforw' || request()->segment(1) == 'laporrw' || request()->segment(1) == 'tanyarw' || request()->segment(1) == 'surveirw') ? 'open' : '' }}">
+            <li class="menu-item {{ (request()->segment(1) == 'datawarga' || request()->segment(1) == 'inforw' || request()->segment(1) == 'laporrw' || request()->segment(1) == 'tanyarw' || request()->segment(1) == 'surveirw' || request()->segment(1) == 'kategoriberita' || request()->segment(1) == 'berita') ? 'open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ri-community-line"></i>
                     <div data-i18n="Edukasi">Edukasi</div>

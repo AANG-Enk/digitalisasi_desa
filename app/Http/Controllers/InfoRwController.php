@@ -1,0 +1,125 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\InfoRw;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
+
+class InfoRwController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $list_info_rw = InfoRw::whereNull('deleted_at')->get();
+        return view('inforw.index',compact('list_info_rw'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $action = route('inforw.store');
+        return view('inforw.form',compact('action'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'judul'     => 'required',
+            'deskripsi' => 'required',
+        ],[
+            'judul.required'    => 'Judul Informasi harus diisi',
+            'deskripsi.required'    => 'Keterangan Informasi harus diisi',
+        ]);
+        try {
+            DB::beginTransaction();
+            InfoRw::create($request->except(['_token']));
+            DB::commit();
+            return redirect()->route('inforw.index')->with('success','Berhasil menambahkan informasi '.$request->judul);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'status'    => false,
+                'message'   => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(InfoRw $inforw)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(InfoRw $inforw)
+    {
+        $action = route('inforw.update',$inforw->id);
+        return view('inforw.form',compact('action','inforw'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, InfoRw $inforw)
+    {
+        $request->validate([
+            'judul'     => 'required',
+            'deskripsi' => 'required',
+        ],[
+            'judul.required'    => 'Judul Informasi harus diisi',
+            'deskripsi.required'    => 'Keterangan Informasi harus diisi',
+        ]);
+
+        $judul = $inforw->judul;
+        try {
+            DB::beginTransaction();
+            if($request->judul != $inforw->judul){
+                $request['slug'] = SlugService::createSlug(InfoRw::class, 'slug', $request->judul);
+            }
+            InfoRw::where('id',$inforw->id)->update($request->except(['_token','_method']));
+            DB::commit();
+            return redirect()->route('inforw.index')->with('success','Berhasil merubah informasi '.$judul);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'status'    => false,
+                'message'   => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(InfoRw $inforw)
+    {
+        $judul = $inforw->judul;
+        try {
+            DB::beginTransaction();
+            InfoRw::where('id',$inforw->id)->update([
+                'deleted_at'    => \Carbon\Carbon::now(),
+            ]);
+            DB::commit();
+            return redirect()->route('inforw.index')->with('success','Berhasil menghapus informasi '.$judul);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'status'    => false,
+                'message'   => $th->getMessage(),
+            ], 500);
+        }
+    }
+}

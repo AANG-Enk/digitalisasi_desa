@@ -139,7 +139,7 @@
 
                     @if (auth()->user()->can('Info RW Access'))
                         <li class="menu-item">
-                            <a href="#" class="menu-link">
+                            <a href="{{ route('inforw.index') }}" class="menu-link">
                             <div data-i18n="Info RW">Info RW</div>
                             </a>
                         </li>

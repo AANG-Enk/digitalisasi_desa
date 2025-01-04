@@ -41,4 +41,5 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
         Route::post('import',[App\Http\Controllers\DataWargaController::class, 'import_store'])->name('datawarga.import.store');
     });
     Route::resource('datawarga', App\Http\Controllers\DataWargaController::class);
+    Route::resource('inforw', App\Http\Controllers\InfoRwController::class);
 });

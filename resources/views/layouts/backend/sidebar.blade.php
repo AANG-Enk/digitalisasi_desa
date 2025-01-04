@@ -122,7 +122,7 @@
         )
 
             <!-- Edukasi -->
-            <li class="menu-item">
+            <li class="menu-item {{ (request()->segment(1) == 'datawarga' || request()->segment(1) == 'inforw' || request()->segment(1) == 'laporrw' || request()->segment(1) == 'tanyarw' || request()->segment(1) == 'surveirw') ? 'open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ri-community-line"></i>
                     <div data-i18n="Edukasi">Edukasi</div>
@@ -130,7 +130,7 @@
 
                 <ul class="menu-sub">
                     @if (auth()->user()->can('Data Warga Access'))
-                        <li class="menu-item">
+                        <li class="menu-item {{ request()->segment(1) == 'datawarga' ? 'active' : '' }}">
                             <a href="{{ route('datawarga.index') }}" class="menu-link">
                             <div data-i18n="Data Warga">Data Warga</div>
                             </a>
@@ -138,7 +138,7 @@
                     @endif
 
                     @if (auth()->user()->can('Info RW Access'))
-                        <li class="menu-item">
+                        <li class="menu-item {{ request()->segment(1) == 'inforw' ? 'active' : '' }}">
                             <a href="{{ route('inforw.index') }}" class="menu-link">
                             <div data-i18n="Info RW">Info RW</div>
                             </a>
@@ -146,17 +146,17 @@
                     @endif
 
                     @if (auth()->user()->can('Berita RW Kategori Access') && auth()->user()->can('Berita RW Access'))
-                        <li class="menu-item">
+                        <li class="menu-item {{ (request()->segment(1) == 'kategoriberita' || request()->segment(1) == 'berita') ? 'open' : '' }}">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <div data-i18n="Berita RW">Berita RW</div>
                             </a>
                             <ul class="menu-sub">
-                                <li class="menu-item">
+                                <li class="menu-item {{ request()->segment(1) == 'kategoriberita' ? 'active' : '' }}">
                                     <a href="#" class="menu-link">
                                       <div data-i18n="Kategori">Kategori</div>
                                     </a>
                                 </li>
-                                <li class="menu-item">
+                                <li class="menu-item {{ request()->segment(1) == 'berita' ? 'active' : '' }}">
                                     <a href="#" class="menu-link">
                                       <div data-i18n="Berita">Berita</div>
                                     </a>
@@ -164,7 +164,7 @@
                             </ul>
                         </li>
                     @else
-                        <li class="menu-item">
+                        <li class="menu-item {{ request()->segment(1) == 'berita' ? 'active' : '' }}">
                             <a href="#" class="menu-link">
                             <div data-i18n="Berita RW">Berita RW</div>
                             </a>
@@ -172,19 +172,19 @@
                     @endif
 
 
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->segment(1) == 'laporrw' ? 'active' : '' }}">
                         <a href="#" class="menu-link">
                         <div data-i18n="Lapor RW">Lapor RW</div>
                         </a>
                     </li>
 
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->segment(1) == 'tanyarw' ? 'active' : '' }}">
                         <a href="#" class="menu-link">
                         <div data-i18n="Tanya RW">Tanya RW</div>
                         </a>
                     </li>
 
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->segment(1) == 'surveirw' ? 'active' : '' }}">
                         <a href="#" class="menu-link">
                         <div data-i18n="Survei RW">Survei RW</div>
                         </a>

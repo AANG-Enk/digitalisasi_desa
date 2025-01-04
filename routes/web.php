@@ -42,4 +42,7 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
     });
     Route::resource('datawarga', App\Http\Controllers\DataWargaController::class);
     Route::resource('inforw', App\Http\Controllers\InfoRwController::class);
+
+    Route::resource('kategoriberita', App\Http\Controllers\KategoriBeritaController::class);
+    Route::resource('berita', App\Http\Controllers\BeritaController::class);
 });

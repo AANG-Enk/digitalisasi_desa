@@ -94,10 +94,18 @@ class PermissionRolesSeeder extends Seeder
             'Tanya RW Delete|Administrator|RW|Warga',
 
             // Survei RW
-            'Survei RW Access|Administrator|RW|Warga',
-            'Survei RW Create|Administrator|RW|Warga',
-            'Survei RW Update|Administrator|RW|Warga',
-            'Survei RW Delete|Administrator|RW|Warga',
+            'Survei RW Access|Administrator|RW',
+            'Survei RW Create|Administrator|RW',
+            'Survei RW Update|Administrator|RW',
+            'Survei RW Delete|Administrator|RW',
+
+            'Survei RW Pertanyaan Access|Administrator|RW',
+            'Survei RW Pertanyaan Create|Administrator|RW',
+            'Survei RW Pertanyaan Update|Administrator|RW',
+            'Survei RW Pertanyaan Delete|Administrator|RW',
+
+            'Survei RW Jawaban Access|Administrator|Warga|RW',
+            'Survei RW Jawaban Create|Administrator|Warga',
         ];
 
         foreach($list_permission as $val){

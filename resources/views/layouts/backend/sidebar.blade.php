@@ -185,7 +185,7 @@
                     </li>
 
                     <li class="menu-item {{ request()->segment(1) == 'surveirw' ? 'active' : '' }}">
-                        <a href="#" class="menu-link">
+                        <a href="{{ route('surveirw.index') }}" class="menu-link">
                         <div data-i18n="Survei RW">Survei RW</div>
                         </a>
                     </li>

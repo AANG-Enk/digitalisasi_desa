@@ -165,7 +165,7 @@
                         </li>
                     @else
                         <li class="menu-item {{ request()->segment(1) == 'berita' ? 'active' : '' }}">
-                            <a href="#" class="menu-link">
+                            <a href="{{ route('berita.index') }}" class="menu-link">
                             <div data-i18n="Berita RW">Berita RW</div>
                             </a>
                         </li>

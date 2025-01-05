@@ -64,10 +64,10 @@ class PermissionRolesSeeder extends Seeder
             'Info RW Delete|Administrator|RW',
 
             // Layanan Surat
-            'Layanan Surat Access|Administrator|RW',
-            'Layanan Surat Create|Administrator|RW',
-            'Layanan Surat Update|Administrator|RW',
-            'Layanan Surat Delete|Administrator|RW',
+            'Layanan Surat Access|Administrator|RW|Warga',
+            'Layanan Surat Create|Administrator|RW|Warga',
+            'Layanan Surat Update|Administrator|RW|Warga',
+            'Layanan Surat Delete|Administrator|RW|Warga',
 
             // Berita RW Kategori
             'Berita RW Kategori Access|Administrator|RW',
@@ -77,9 +77,9 @@ class PermissionRolesSeeder extends Seeder
 
             // Berita RW
             'Berita RW Access|Administrator|RW|Warga',
-            'Berita RW Create|Administrator|RW|Warga',
-            'Berita RW Update|Administrator|RW|Warga',
-            'Berita RW Delete|Administrator|RW|Warga',
+            'Berita RW Create|Administrator|RW',
+            'Berita RW Update|Administrator|RW',
+            'Berita RW Delete|Administrator|RW',
 
             // Lapor RW
             'Lapor RW Access|Administrator|RW|Warga',

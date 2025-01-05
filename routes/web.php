@@ -33,6 +33,9 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
     Route::prefix('datawarga')->group(function () {
         Route::get('import',[App\Http\Controllers\DataWargaController::class, 'import_index'])->name('datawarga.import.index');
         Route::post('import',[App\Http\Controllers\DataWargaController::class, 'import_store'])->name('datawarga.import.store');
+
+        Route::post('{user}/pilih_rt',[App\Http\Controllers\DataWargaController::class, 'pilih_rt'])->name('datawarga.pilih.rt');
+        Route::post('{user}/pilih_rw',[App\Http\Controllers\DataWargaController::class, 'pilih_rw'])->name('datawarga.pilih.rw');
     });
     Route::prefix('laporrw')->group(function () {
         Route::get('dibaca/{laporrw:slug}',[App\Http\Controllers\LaporRwController::class, 'dibaca'])->name('laporrw.dibaca');
@@ -69,6 +72,10 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
                 Route::post('/',[App\Http\Controllers\SurveiJawabanController::class, 'store'])->name('surveirw.jawaban.store');
             });
         });
+    });
+
+    Route::prefix('layanansurat')->group(function () {
+        Route::get('/',[App\Http\Controllers\LayananSuratController::class, 'index'])->name('layanansurat.index');
     });
 
     Route::resource('users', App\Http\Controllers\UserController::class);

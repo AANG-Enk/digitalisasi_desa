@@ -29,6 +29,8 @@ return new class extends Migration
             $table->enum('jenis_kelamin',['L','P'])->nullable();
             $table->string('jenis_pekerjaan')->nullable();
             $table->string('status_pernikahan')->nullable();
+            $table->boolean('ketua_rt')->default(false);
+            $table->boolean('ketua_rw')->default(false);
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

@@ -171,4 +171,44 @@ class DataWargaController extends Controller
         Excel::import(new DataWargaMultipleSheetImport, $request->file('file'));
         return redirect()->route('datawarga.index')->with('success','Berhasil mengimport data warga file excel');
     }
+
+    public function pilih_rt(User $user)
+    {
+        $name = $user->name;
+        try {
+            DB::beginTransaction();
+            User::whereNotNull('nik')->update(['ketua_rt'  => false]);
+            User::where('id',$user->id)->update([
+                'ketua_rt'  => true,
+            ]);
+            DB::commit();
+            return redirect()->route('datawarga.index')->with('success','Warga '.$name.' Menjadi Ketua RT '.$user->rt);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'status'    => false,
+                'message'   => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function pilih_rw(User $user)
+    {
+        $name = $user->name;
+        try {
+            DB::beginTransaction();
+            User::whereNotNull('nik')->update(['ketua_rw'  => false]);
+            User::where('id',$user->id)->update([
+                'ketua_rw'  => true,
+            ]);
+            DB::commit();
+            return redirect()->route('datawarga.index')->with('success','Warga '.$name.' Menjadi Ketua RW '.$user->rw);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'status'    => false,
+                'message'   => $th->getMessage(),
+            ], 500);
+        }
+    }
 }

@@ -35,6 +35,8 @@ class User extends Authenticatable
         'jenis_kelamin',
         'jenis_pekerjaan',
         'status_pernikahan',
+        'ketua_rt',
+        'ketua_rw'
     ];
 
     /**

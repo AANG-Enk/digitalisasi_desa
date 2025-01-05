@@ -36,6 +36,8 @@
                     <th>KK</th>
                     <th>NIK</th>
                     <th>Nama</th>
+                    <th>Ketua RT</th>
+                    <th>Ketua RW</th>
                     <th>Tempat Lahir</th>
                     <th>Tanggal Lahir</th>
                     <th>Status Kawin</th>
@@ -58,6 +60,8 @@
                         <td>{{ $item->kk }}</td>
                         <td>{{ $item->nik }}</td>
                         <td>{{ $item->name }}</td>
+                        <td>{{ ($item->ketua_rt)?'Ya':'Tidak' }}</td>
+                        <td>{{ ($item->ketua_rw)?'Ya':'Tidak' }}</td>
                         <td>{{ $item->tempat_lahir }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->tanggal_lahir)->isoFormat('DD-MMMM-YYYY') }}</td>
                         <td>{{ $item->status_pernikahan }}</td>
@@ -72,6 +76,16 @@
                             <td>
                                 <div class="d-flex gap-1">
                                     @can('Data Warga Update')
+                                        @if (!$item->ketua_rt && !$item->ketua_rw)
+                                            <form method="post" action="{{ route('datawarga.pilih.rt',$item->id) }}" id="form-ketua-rt-{{ $loop->iteration }}" class="d-inline">
+                                                @csrf
+                                                <a href="javascript:void(0)" onclick="Swal.fire({ title: 'Apakah kamu yakin?', text: 'Menjadikan Bapak/Ibu {{ $item->name }} Menjadi Ketua RT {{ $item->rt }}', icon: 'warning', showCancelButton: true, confirmButtonText: 'Ya, Yakin', customClass: { confirmButton: 'btn btn-primary me-3 waves-effect waves-light', cancelButton: 'btn btn-outline-secondary waves-effect' },}).then((willDelete) => { if (willDelete.value) { document.getElementById('form-ketua-rt-{{ $loop->iteration }}').submit(); } });" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Pilih {{ $item->name }} Menjadi Ketua RT" class="text-success"><i class="menu-icon tf-icons ri-thumb-up-line"></i></a>
+                                            </form>
+                                            <form method="post" action="{{ route('datawarga.pilih.rw',$item->id) }}" id="form-ketua-rw-{{ $loop->iteration }}" class="d-inline">
+                                                @csrf
+                                                <a href="javascript:void(0)" onclick="Swal.fire({ title: 'Apakah kamu yakin?', text: 'Menjadikan Bapak/Ibu {{ $item->name }} Menjadi Ketua RW {{ $item->rw }}', icon: 'warning', showCancelButton: true, confirmButtonText: 'Ya, Yakin', customClass: { confirmButton: 'btn btn-primary me-3 waves-effect waves-light', cancelButton: 'btn btn-outline-secondary waves-effect' },}).then((willDelete) => { if (willDelete.value) { document.getElementById('form-ketua-rw-{{ $loop->iteration }}').submit(); } });" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Pilih {{ $item->name }} Menjadi Ketua RW" class="text-success"><i class="menu-icon tf-icons ri-star-line"></i></a>
+                                            </form>
+                                        @endif
                                         <a href="{{ route('datawarga.edit',$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit {{ $item->name }}" class="text-secondary"><i class="menu-icon tf-icons ri-edit-2-line"></i></a>
                                     @endcan
                                     @can('Data Warga Delete')

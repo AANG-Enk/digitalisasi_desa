@@ -69,7 +69,7 @@
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
         <li class="menu-item {{ request()->segment(1) == 'dashboard' ? 'active' : '' }}">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons ri-home-smile-line"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
                 {{-- <div class="badge bg-danger rounded-pill ms-auto">5</div> --}}
@@ -179,7 +179,7 @@
                     </li>
 
                     <li class="menu-item {{ request()->segment(1) == 'tanyarw' ? 'active' : '' }}">
-                        <a href="#" class="menu-link">
+                        <a href="{{ route('tanyarw.index') }}" class="menu-link">
                         <div data-i18n="Tanya RW">Tanya RW</div>
                         </a>
                     </li>

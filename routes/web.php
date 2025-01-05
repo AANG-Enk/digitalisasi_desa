@@ -50,4 +50,5 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
         Route::get('dibaca/{laporrw:slug}',[App\Http\Controllers\LaporRwController::class, 'dibaca'])->name('laporrw.dibaca');
     });
     Route::resource('laporrw', App\Http\Controllers\LaporRwController::class);
+    Route::resource('tanyarw', App\Http\Controllers\TanyaRwController::class);
 });

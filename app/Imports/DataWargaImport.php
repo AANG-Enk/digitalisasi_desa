@@ -30,6 +30,8 @@ class DataWargaImport implements ToCollection
                 'tanggal_lahir' => \Carbon\Carbon::createFromFormat('d-m-Y', str_replace('|','-',$data[5]))->format('Y-m-d'),
                 'jenis_kelamin' => strtoupper($data[7]),
                 'email_verified_at' => \Carbon\Carbon::now(),
+                'jenis_pekerjaan'   => $data[12],
+                'status_pernikahan' => $data[6],
             ]);
             $user->assignRole('Warga');
         }

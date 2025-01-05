@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->enum('jenis_kelamin',['L','P'])->nullable();
+            $table->string('jenis_pekerjaan')->nullable();
+            $table->string('status_pernikahan')->nullable();
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

@@ -38,12 +38,14 @@
                     <th>Nama</th>
                     <th>Tempat Lahir</th>
                     <th>Tanggal Lahir</th>
+                    <th>Status Kawin</th>
                     <th>Jenis Kelamin</th>
                     <th>Alamat</th>
                     <th>RT</th>
                     <th>RW</th>
                     <th>HP</th>
                     <th>Status</th>
+                    <th>Jenis Pekerjaan</th>
                     @canany(['Data Warga Update','Data Warga Delete'])
                         <th>Aksi</th>
                     @endcanany
@@ -58,12 +60,14 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->tempat_lahir }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->tanggal_lahir)->isoFormat('DD-MMMM-YYYY') }}</td>
+                        <td>{{ $item->status_pernikahan }}</td>
                         <td>{{ $item->jenis_kelamin }}</td>
                         <td>{{ $item->alamat }}</td>
                         <td>{{ $item->rt }}</td>
                         <td>{{ $item->rw }}</td>
                         <td>{{ $item->hp }}</td>
                         <td>{{ $item->status }}</td>
+                        <th>{{ $item->jenis_pekerjaan }}</th>
                         @canany(['Data Warga Update','Data Warga Delete'])
                             <td>
                                 <div class="d-flex gap-1">

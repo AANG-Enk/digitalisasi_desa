@@ -198,6 +198,46 @@
                         </div>
                     </div>
                     <div class="row mb-4">
+                        <label class="col-sm-2 col-form-label" >Status Pernikahan</label>
+                        <div class="col-sm-10">
+                            <div class="form-check form-check-inline mt-4">
+                                <input
+                                  class="form-check-input @error('status_pernikahan') is-invalid @enderror"
+                                  type="radio"
+                                  name="status_pernikahan"
+                                  id="sudah"
+                                  {{ (isset($user) && $user->status_pernikahan == 'S') ? 'checked' : '' }}
+                                  value="S" />
+                                <label class="form-check-label" for="sudah">Sudah</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-4">
+                                <input
+                                  class="form-check-input @error('status_pernikahan') is-invalid @enderror"
+                                  type="radio"
+                                  name="status_pernikahan"
+                                  id="belum"
+                                  {{ (isset($user) && $user->status_pernikahan == 'B') ? 'checked' : '' }}
+                                  value="B" />
+                                <label class="form-check-label" for="belum">Belum</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-4">
+                                <input
+                                  class="form-check-input @error('status_pernikahan') is-invalid @enderror"
+                                  type="radio"
+                                  name="status_pernikahan"
+                                  id="pernah"
+                                  {{ (isset($user) && $user->status_pernikahan == 'P') ? 'checked' : '' }}
+                                  value="P" />
+                                <label class="form-check-label" for="pernah">Pernah</label>
+                            </div>
+                            @error('status_pernikahan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-4">
                         <label class="col-sm-2 col-form-label" for="no_hp">No. HP/Whatsapp</label>
                         <div class="col-sm-10">
                             <input
@@ -268,6 +308,23 @@
                                 <label class="form-check-label" for="data-warga-meninggal">Meninggal</label>
                             </div>
                             @error('status')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-sm-2 col-form-label" for="jenis_pekerjaan">Jenis Pekerjaan</label>
+                        <div class="col-sm-10">
+                            <input
+                                type="text"
+                                class="form-control @error('jenis_pekerjaan') is-invalid @enderror"
+                                id="jenis_pekerjaan"
+                                name="jenis_pekerjaan"
+                                value="{{ isset($user) ? old('jenis_pekerjaan',$user->jenis_pekerjaan) : old('jenis_pekerjaan') }}"
+                                placeholder="Masukkan Tempat Lahir" />
+                            @error('jenis_pekerjaan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

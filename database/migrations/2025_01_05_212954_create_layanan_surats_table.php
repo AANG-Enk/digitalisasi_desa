@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nomor_surat_rt')->nullable();
             $table->string('nomor_surat_rw')->nullable();
             $table->string('rt')->nullable();
+            $table->string('rw')->nullable();
             $table->string('nama_rt')->nullable();
             $table->string('nama_rw')->nullable();
             $table->date('tanggal_tanda_tangan')->nullable();

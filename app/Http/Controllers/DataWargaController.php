@@ -177,7 +177,7 @@ class DataWargaController extends Controller
         $name = $user->name;
         try {
             DB::beginTransaction();
-            User::whereNotNull('nik')->update(['ketua_rt'  => false]);
+            User::where('rt',$user->rt)->update(['ketua_rt'  => false]);
             User::where('id',$user->id)->update([
                 'ketua_rt'  => true,
             ]);
@@ -197,10 +197,15 @@ class DataWargaController extends Controller
         $name = $user->name;
         try {
             DB::beginTransaction();
-            User::whereNotNull('nik')->update(['ketua_rw'  => false]);
+            User::where('rw',$user->rw)->update(['ketua_rw'  => false]);
+            $existingUser = User::role('Admin RW')->where('rw', $user->rw)->first();
+            if ($existingUser) {
+                $existingUser->removeRole('Admin RW');
+            }
             User::where('id',$user->id)->update([
                 'ketua_rw'  => true,
             ]);
+            $user->assignRole('Admin RW');
             DB::commit();
             return redirect()->route('datawarga.index')->with('success','Warga '.$name.' Menjadi Ketua RW '.$user->rw);
         } catch (\Throwable $th) {

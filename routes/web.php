@@ -76,6 +76,26 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
 
     Route::prefix('layanansurat')->group(function () {
         Route::get('/',[App\Http\Controllers\LayananSuratController::class, 'index'])->name('layanansurat.index');
+        Route::get('/create',[App\Http\Controllers\LayananSuratController::class, 'create'])->name('layanansurat.create');
+        Route::post('/store',[App\Http\Controllers\LayananSuratController::class, 'store'])->name('layanansurat.store');
+        Route::post('/tujuan',[App\Http\Controllers\LayananSuratController::class, 'tujuan'])->name('layanansurat.tujuan');
+        Route::prefix('{layanansurat}')->group(function () {
+            Route::get('/edit',[App\Http\Controllers\LayananSuratController::class, 'edit'])->name('layanansurat.edit');
+            Route::put('/update',[App\Http\Controllers\LayananSuratController::class, 'update'])->name('layanansurat.update');
+            Route::delete('/destroy',[App\Http\Controllers\LayananSuratController::class, 'destroy'])->name('layanansurat.destroy');
+
+            Route::prefix('nomorrt')->group(function () {
+                Route::get('/',[App\Http\Controllers\LayananSuratController::class, 'nomorrt_index'])->name('layanansurat.nomorrt.index');
+                Route::post('/',[App\Http\Controllers\LayananSuratController::class, 'nomorrt_store'])->name('layanansurat.nomorrt.store');
+            });
+
+            Route::prefix('nomorrw')->group(function () {
+                Route::get('/',[App\Http\Controllers\LayananSuratController::class, 'nomorrw_index'])->name('layanansurat.nomorrw.index');
+                Route::post('/',[App\Http\Controllers\LayananSuratController::class, 'nomorrw_store'])->name('layanansurat.nomorrw.store');
+            });
+
+            Route::get('print',[App\Http\Controllers\LayananSuratController::class, 'print'])->name('layanansurat.print');
+        });
     });
 
     Route::resource('users', App\Http\Controllers\UserController::class);

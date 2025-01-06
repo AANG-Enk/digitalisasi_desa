@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('layanan_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('surat_id');
+            $table->foreignId('surat_tujuan_id');
             $table->foreignId('user_id');
             $table->string('nomor_surat_rt')->nullable();
             $table->string('nomor_surat_rw')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('tanggal_tanda_tangan')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
-            $table->foreign('surat_id','foreign_key_surat_layanan_surats')->references('id')->on('surats')->onDelete('cascade');
+            $table->foreign('surat_tujuan_id','foreign_key_surat_tujuan_layanan_surats')->references('id')->on('surat_tujuans')->onDelete('cascade');
             $table->foreign('user_id','foreign_key_user_layanan_surats')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -35,7 +35,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('layanan_surats', function (Blueprint $table) {
-            $table->dropForeign('foreign_key_surat_layanan_surats');
+            $table->dropForeign('foreign_key_surat_tujuan_layanan_surats');
             $table->dropForeign('foreign_key_user_layanan_surats');
         });
         Schema::dropIfExists('layanan_surats');

@@ -145,6 +145,14 @@
                         </li>
                     @endif
 
+                    @if (auth()->user()->can('Layanan Surat Access'))
+                        <li class="menu-item {{ request()->segment(1) == 'layanansurat' ? 'active' : '' }}">
+                            <a href="{{ route('layanansurat.index') }}" class="menu-link">
+                            <div data-i18n="Layanan Surat">Layanan Surat</div>
+                            </a>
+                        </li>
+                    @endif
+
                     @if (auth()->user()->can('Berita RW Kategori Access') && auth()->user()->can('Berita RW Access'))
                         <li class="menu-item {{ (request()->segment(1) == 'kategoriberita' || request()->segment(1) == 'berita') ? 'open' : '' }}">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">

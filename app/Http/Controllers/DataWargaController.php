@@ -198,14 +198,14 @@ class DataWargaController extends Controller
         try {
             DB::beginTransaction();
             User::where('rw',$user->rw)->update(['ketua_rw'  => false]);
-            $existingUser = User::role('Admin RW')->where('rw', $user->rw)->first();
+            $existingUser = User::role('RW')->where('rw', $user->rw)->first();
             if ($existingUser) {
-                $existingUser->removeRole('Admin RW');
+                $existingUser->removeRole('RW');
             }
             User::where('id',$user->id)->update([
                 'ketua_rw'  => true,
             ]);
-            $user->assignRole('Admin RW');
+            $user->assignRole('RW');
             DB::commit();
             return redirect()->route('datawarga.index')->with('success','Warga '.$name.' Menjadi Ketua RW '.$user->rw);
         } catch (\Throwable $th) {

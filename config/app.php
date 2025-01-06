@@ -187,6 +187,8 @@ return [
          */
 
          App\Providers\FortifyServiceProvider::class,
+         Codedge\Fpdf\FpdfServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -212,6 +214,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Fpdf' => Codedge\Fpdf\Facades\Fpdf::class,
     ])->toArray(),
 
 ];

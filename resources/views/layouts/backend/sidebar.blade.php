@@ -265,8 +265,8 @@
                     @endif
 
                     @if (auth()->user()->can('Tani RW Access'))
-                        <li class="menu-item">
-                            <a href="#" class="menu-link">
+                        <li class="menu-item {{ request()->segment(1) == 'tanirw' ? 'active' : '' }}">
+                            <a href="{{ route('tanirw.index') }}" class="menu-link">
                             <div data-i18n="Tani RW">Tani RW</div>
                             </a>
                         </li>

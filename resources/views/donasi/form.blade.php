@@ -9,10 +9,10 @@
 @endsection
 
 @section('title')
-    @if (isset($donasirw))
-        Edit Donasi RW {{ $donasirw->judul }} - Digitalisasi Desa
+    @if (isset($ireda))
+        Edit IREDA {{ $ireda->judul }} - Digitalisasi Desa
     @else
-        Tambah Donasi RW - Digitalisasi Desa
+        Tambah IREDA - Digitalisasi Desa
     @endif
 @endsection
 
@@ -25,12 +25,12 @@
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="{{ route('donasirw.index') }}">Daftar Donasi RW</a>
+                <a href="{{ route('ireda.index') }}">Daftar IREDA</a>
             </li>
-            @if (isset($donasirw))
-                <li class="breadcrumb-item active">Edit Donasi RW {{ $donasirw->judul }}</li>
+            @if (isset($ireda))
+                <li class="breadcrumb-item active">Edit IREDA {{ $ireda->judul }}</li>
             @else
-                <li class="breadcrumb-item active">Tambah Donasi RW</li>
+                <li class="breadcrumb-item active">Tambah IREDA</li>
             @endif
         </ol>
     </nav>
@@ -45,7 +45,7 @@
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ $action }}" id="form-area" enctype="multipart/form-data">
-                    @isset($donasirw) @method('PUT') @endisset
+                    @isset($ireda) @method('PUT') @endisset
                     @csrf
                     <div class="row mb-4">
                         <label class="col-sm-2 col-form-label" for="judul">Judul <span class="text-danger">*</span></label>
@@ -55,7 +55,7 @@
                                 class="form-control @error('judul') is-invalid @enderror"
                                 id="judul"
                                 name="judul"
-                                value="{{ isset($donasirw) ? old('judul',$donasirw->judul) : old('judul') }}"
+                                value="{{ isset($ireda) ? old('judul',$ireda->judul) : old('judul') }}"
                                 placeholder="Masukkan Judul" />
                             @error('judul')
                                 <div class="invalid-feedback">
@@ -72,7 +72,7 @@
                                 class="form-control @error('target') is-invalid @enderror"
                                 id="target"
                                 name="target"
-                                value="{{ isset($donasirw) ? old('target',intval($donasirw->target)) : old('target') }}"
+                                value="{{ isset($ireda) ? old('target',intval($ireda->target)) : old('target') }}"
                                 placeholder="Masukkan Target" />
                             @error('target')
                                 <div class="invalid-feedback">
@@ -89,7 +89,7 @@
                                 class="form-control @error('berakhir') is-invalid @enderror"
                                 id="berakhir"
                                 name="berakhir"
-                                value="{{ isset($donasirw) ? old('berakhir',\Carbon\Carbon::parse($donasirw->berakhir)->isoFormat('DD-MM-YYYY')) : old('berakhir') }}"
+                                value="{{ isset($ireda) ? old('berakhir',\Carbon\Carbon::parse($ireda->berakhir)->isoFormat('DD-MM-YYYY')) : old('berakhir') }}"
                                 placeholder="Masukkan Tanggal" />
                             @error('berakhir')
                                 <div class="invalid-feedback">
@@ -101,7 +101,7 @@
                     <div class="row mb-4">
                         <label class="col-sm-2 col-form-label" for="alamat">Alamat <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
-                            <textarea class="form-control @error('alamat') is-invalid @enderror" name="alamat" id="alamat">{{ isset($donasirw) ? old('alamat',$donasirw->alamat) : old('alamat') }}</textarea>
+                            <textarea class="form-control @error('alamat') is-invalid @enderror" name="alamat" id="alamat">{{ isset($ireda) ? old('alamat',$ireda->alamat) : old('alamat') }}</textarea>
                             @error('target')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -143,9 +143,9 @@
                                 </span>
                             </div>
                             <div id="editor-container" style="height: 300px;" class="@error('deskripsi') is-invalid @enderror">
-                                {!! isset($donasirw) ? old('deskripsi',$donasirw->deskripsi) : old('deskripsi') !!}
+                                {!! isset($ireda) ? old('deskripsi',$ireda->deskripsi) : old('deskripsi') !!}
                             </div>
-                            <textarea id="content" name="deskripsi" style="display: none;">{!! isset($donasirw) ? old('deskripsi',$donasirw->deskripsi) : old('deskripsi') !!}</textarea>
+                            <textarea id="content" name="deskripsi" style="display: none;">{!! isset($ireda) ? old('deskripsi',$ireda->deskripsi) : old('deskripsi') !!}</textarea>
                             @error('deskripsi')
                                 <div class="invalid-feedback">
                                     {{ $message }}

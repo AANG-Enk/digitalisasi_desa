@@ -115,15 +115,15 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
         });
     });
 
-    Route::prefix('donasirw')->group(function () {
+    Route::prefix('ireda')->group(function () {
         Route::prefix('{donasi:slug}')->group(function () {
-            Route::get('/daftar',[App\Http\Controllers\BayarDonasiController::class, 'index'])->name('donasirw.bayardonasi.index');
-            Route::get('/donasikan',[App\Http\Controllers\BayarDonasiController::class, 'create'])->name('donasirw.bayardonasi.create');
-            Route::post('/donasikan',[App\Http\Controllers\BayarDonasiController::class, 'store'])->name('donasirw.bayardonasi.store');
+            Route::get('/daftar',[App\Http\Controllers\BayarDonasiController::class, 'index'])->name('ireda.iuran.index');
+            Route::get('/iuran',[App\Http\Controllers\BayarDonasiController::class, 'create'])->name('ireda.iuran.create');
+            Route::post('/iuran',[App\Http\Controllers\BayarDonasiController::class, 'store'])->name('ireda.iuran.store');
             Route::prefix('{bayardonasi}/bukti')->group(function () {
-                Route::get('/',[App\Http\Controllers\BayarDonasiController::class, 'bukti_index'])->name('donasirw.bayardonasi.bukti.index');
-                Route::post('/',[App\Http\Controllers\BayarDonasiController::class, 'bukti_store'])->name('donasirw.bayardonasi.bukti.store');
-                Route::post('/verifikasi',[App\Http\Controllers\BayarDonasiController::class, 'verifikasi'])->name('donasirw.bayardonasi.verifikasi');
+                Route::get('/',[App\Http\Controllers\BayarDonasiController::class, 'bukti_index'])->name('ireda.iuran.bukti.index');
+                Route::post('/',[App\Http\Controllers\BayarDonasiController::class, 'bukti_store'])->name('ireda.iuran.bukti.store');
+                Route::post('/verifikasi',[App\Http\Controllers\BayarDonasiController::class, 'verifikasi'])->name('ireda.iuran.verifikasi');
             });
         });
     });
@@ -142,5 +142,5 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
     Route::resource('lokerrw', App\Http\Controllers\LokerRwController::class);
     Route::resource('forumrw', App\Http\Controllers\ForumController::class);
     Route::resource('tanirw', App\Http\Controllers\TaniRwController::class);
-    Route::resource('donasirw', App\Http\Controllers\DonasiController::class);
+    Route::resource('ireda', App\Http\Controllers\DonasiController::class);
 });

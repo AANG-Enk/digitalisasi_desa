@@ -96,10 +96,10 @@
                                         <td>
                                             <div class="d-flex gap-1">
                                                 @can('Donasi RW Update')
-                                                    <a href="{{ route('donasirw.edit',$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit {{ $item->name }}" class="text-secondary"><i class="menu-icon tf-icons ri-edit-2-line"></i></a>
+                                                    <a href="{{ route('ireda.edit',$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit {{ $item->name }}" class="text-secondary"><i class="menu-icon tf-icons ri-edit-2-line"></i></a>
                                                 @endcan
                                                 @can('Donasi RW Delete')
-                                                    <form method="post" action="{{ route('donasirw.destroy',$item->id) }}" id="form-delete-{{ $loop->iteration }}" class="d-inline">
+                                                    <form method="post" action="{{ route('ireda.destroy',$item->id) }}" id="form-delete-{{ $loop->iteration }}" class="d-inline">
                                                         @csrf
                                                         @method('delete')
                                                         <a href="javascript:void(0)" onclick="Swal.fire({ title: 'Apakah kamu yakin?', text: 'Hapus Donasi RW, data tidak bisa dikembalikkan', icon: 'warning', showCancelButton: true, confirmButtonText: 'Ya, Hapus', customClass: { confirmButton: 'btn btn-primary me-3 waves-effect waves-light', cancelButton: 'btn btn-outline-secondary waves-effect' },}).then((willDelete) => { if (willDelete.value) { document.getElementById('form-delete-{{ $loop->iteration }}').submit(); } });" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete {{ $item->name }}" class="text-danger"><i class="menu-icon tf-icons ri-delete-bin-line"></i></a>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="my-3 d-flex justify-content-center gap-2">
                     @can('Donasi RW Create')
-                        <a href="{{ route('donasirw.create') }}" class="btn btn-primary">Tambah Donasi RW</a>
+                        <a href="{{ route('ireda.create') }}" class="btn btn-primary">Tambah Donasi RW</a>
                     @endcan
                 </div>
             </div>
@@ -156,7 +156,7 @@
                                         <td>
                                             @if (!is_null($item->file))
                                                 @if (!$item->is_verified)
-                                                    <form method="post" action="{{ route('donasirw.bayardonasi.verifikasi',[$item->donasi->slug,$item->id]) }}" id="form-verifikasi-{{ $loop->iteration }}" class="d-inline">
+                                                    <form method="post" action="{{ route('ireda.iuran.verifikasi',[$item->donasi->slug,$item->id]) }}" id="form-verifikasi-{{ $loop->iteration }}" class="d-inline">
                                                         @csrf
                                                         <a href="javascript:void(0)" onclick="Swal.fire({ title: 'Apakah kamu yakin?', text: 'Bukti Pembayaran Donasi {{ $item->donasi->judul }} Oleh Bapak/Ibu/Sdr/i {{ $item->bayar->name }} Sudah Sah', icon: 'warning', showCancelButton: true, confirmButtonText: 'Ya', customClass: { confirmButton: 'btn btn-primary me-3 waves-effect waves-light', cancelButton: 'btn btn-outline-secondary waves-effect' },}).then((willDelete) => { if (willDelete.value) { document.getElementById('form-verifikasi-{{ $loop->iteration }}').submit(); } });" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Setujui Donasi {{ $item->bayar->name }}" class="text-success"><i class="menu-icon tf-icons ri-thumb-up-line"></i></a>
                                                     </form>

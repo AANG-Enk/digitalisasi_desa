@@ -43,7 +43,7 @@
                         </tr>
                     </table>
                     <div class="d-flex justify-content-center mt-2">
-                        <a href="{{ route('donasirw.bayardonasi.index',$item->slug) }}" class="btn btn-outline-primary">Donasi</a>
+                        <a href="{{ route('ireda.iuran.index',$item->slug) }}" class="btn btn-outline-primary">Iuran</a>
                     </div>
                 </div>
             </div>

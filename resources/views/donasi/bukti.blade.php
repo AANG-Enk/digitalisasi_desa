@@ -19,10 +19,10 @@
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="{{ route('donasirw.index') }}">Daftar Donasi RW</a>
+                <a href="{{ route('ireda.index') }}">Daftar Donasi RW</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="{{ route('donasirw.bayardonasi.index',$donasi->slug) }}">{{ $donasi->judul }}</a>
+                <a href="{{ route('ireda.iuran.index',$donasi->slug) }}">{{ $donasi->judul }}</a>
             </li>
             <li class="breadcrumb-item active">Upload Bukti Pembayaran</li>
         </ol>

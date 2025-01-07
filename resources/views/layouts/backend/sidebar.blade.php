@@ -215,7 +215,7 @@
             auth()->user()->can('Tani RW Access')
         )
             <!-- Diskusi -->
-            <li class="menu-item {{ (request()->segment(1) == 'lokerrw' || request()->segment(1) == 'forumrw' || request()->segment(1) == 'forumpengurusrw' || request()->segment(1) == 'tanirw' || request()->segment(1) == 'donasirw') ? 'open' : '' }}">
+            <li class="menu-item {{ (request()->segment(1) == 'lokerrw' || request()->segment(1) == 'forumrw' || request()->segment(1) == 'forumpengurusrw' || request()->segment(1) == 'tanirw' || request()->segment(1) == 'ireda') ? 'open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ri-discuss-line"></i>
                     <div data-i18n="Diskusi">Diskusi</div>
@@ -273,9 +273,9 @@
                     @endif
 
                     @if (auth()->user()->can('Donasi RW Access'))
-                        <li class="menu-item {{ request()->segment(1) == 'donasirw' ? 'active' : '' }}">
-                            <a href="{{ route('donasirw.index') }}" class="menu-link">
-                            <div data-i18n="RW Donasi">RW Donasi</div>
+                        <li class="menu-item {{ request()->segment(1) == 'ireda' ? 'active' : '' }}">
+                            <a href="{{ route('ireda.index') }}" class="menu-link">
+                            <div data-i18n="IREDA">IREDA</div>
                             </a>
                         </li>
                     @endif

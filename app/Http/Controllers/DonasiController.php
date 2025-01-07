@@ -32,7 +32,7 @@ class DonasiController extends Controller
      */
     public function create()
     {
-        $action = route('donasirw.store');
+        $action = route('ireda.store');
         return view('donasi.form',compact('action'));
     }
 
@@ -60,7 +60,7 @@ class DonasiController extends Controller
             $request['user_id']         = auth()->user()->id;
             Donasi::create($request->except(['_token']));
             DB::commit();
-            return redirect()->route('donasirw.index')->with('success','Berhasil menambahkan donasi '.$request->judul);
+            return redirect()->route('ireda.index')->with('success','Berhasil menambahkan donasi '.$request->judul);
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([
@@ -73,7 +73,7 @@ class DonasiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Donasi $donasirw)
+    public function show(Donasi $ireda)
     {
         //
     }
@@ -81,16 +81,16 @@ class DonasiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Donasi $donasirw)
+    public function edit(Donasi $ireda)
     {
-        $action = route('donasirw.update',$donasirw->id);
-        return view('donasi.form',compact('action','donasirw'));
+        $action = route('ireda.update',$ireda->id);
+        return view('donasi.form',compact('action','ireda'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Donasi $donasirw)
+    public function update(Request $request, Donasi $ireda)
     {
         $request->validate([
             'judul'                 => 'required',
@@ -106,13 +106,13 @@ class DonasiController extends Controller
             'target.required'       => 'Target Donasi harus diisi',
         ]);
 
-        $judul = $donasirw->judul;
+        $judul = $ireda->judul;
         try {
             DB::beginTransaction();
             $request['berakhir']        = \Carbon\Carbon::createFromFormat('d-m-Y',$request['berakhir'])->format('Y-m-d');
-            Donasi::where('id',$donasirw->id)->update($request->except(['_token','_method']));
+            Donasi::where('id',$ireda->id)->update($request->except(['_token','_method']));
             DB::commit();
-            return redirect()->route('donasirw.index')->with('success','Berhasil menambahkan donasi '.$judul);
+            return redirect()->route('ireda.index')->with('success','Berhasil menambahkan donasi '.$judul);
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([
@@ -125,16 +125,16 @@ class DonasiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Donasi $donasirw)
+    public function destroy(Donasi $ireda)
     {
-        $judul = $donasirw->judul;
+        $judul = $ireda->judul;
         try {
             DB::beginTransaction();
-            Donasi::where('id',$donasirw->id)->update([
+            Donasi::where('id',$ireda->id)->update([
                 'deleted_at'    => \Carbon\Carbon::now(),
             ]);
             DB::commit();
-            return redirect()->route('donasirw.index')->with('success','Berhasil menghapus donasi '.$judul);
+            return redirect()->route('ireda.index')->with('success','Berhasil menghapus donasi '.$judul);
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([

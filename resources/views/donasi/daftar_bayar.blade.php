@@ -1,7 +1,7 @@
 @extends('layouts.backend.main')
 
 @section('title')
-    Daftar Donasi {{ $donasi->judul }} - Digitalisasi Desa
+    Daftar IREDA {{ $donasi->judul }} - Digitalisasi Desa
 @endsection
 
 @section('vendorcss')
@@ -19,7 +19,7 @@
             <a href="{{ route('dashboard') }}">Dashboard</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="{{ route('donasirw.index') }}">Daftar Donasi RW</a>
+            <a href="{{ route('ireda.index') }}">Daftar IREDA</a>
           </li>
           <li class="breadcrumb-item active">{{ $donasi->judul }}</li>
         </ol>
@@ -68,7 +68,7 @@
                             </td>
                             @can('Donasi RW Bukti')
                                 <td>
-                                    <a href="{{ route('donasirw.bayardonasi.bukti.index',[$donasi->slug,$item->id]) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Upload Bukti {{ $item->name }}" class="text-success"><i class="menu-icon tf-icons ri-file-text-line"></i></a>
+                                    <a href="{{ route('ireda.iuran.bukti.index',[$donasi->slug,$item->id]) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Upload Bukti {{ $item->name }}" class="text-success"><i class="menu-icon tf-icons ri-file-text-line"></i></a>
                                 </td>
                             @endcan
                         </tr>
@@ -78,7 +78,7 @@
         </div>
         <div class="my-3 d-flex justify-content-center gap-2">
             @can('Donasi RW Setor')
-                <a href="{{ route('donasirw.bayardonasi.create',$donasi->slug) }}" class="btn btn-primary">Tambah Donasi</a>
+                <a href="{{ route('ireda.iuran.create',$donasi->slug) }}" class="btn btn-primary">Tambah Donasi</a>
             @endcan
         </div>
     </div>
@@ -97,7 +97,7 @@
                 if (dt_basic_table.length) {
                     if (!$.fn.DataTable.isDataTable('.datatables-datadonasirw')) {
                         dt_basic = dt_basic_table.DataTable()
-                        $('div.head-label').html('<h5 class="card-title mb-0">Daftar Donasi RW</h5>');
+                        $('div.head-label').html('<h5 class="card-title mb-0">Daftar IREDA</h5>');
                     }
                 }
             })

@@ -19,7 +19,7 @@
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="{{ route('donasirw.index') }}">Daftar Donasi RW</a>
+                <a href="{{ route('ireda.index') }}">Daftar Ireda</a>
             </li>
             <li class="breadcrumb-item active">{{ $donasi->judul }}</li>
         </ol>
@@ -30,7 +30,7 @@
     <div class="col-xxl">
         <div class="card mb-6">
             <div class="card-header d-flex align-items-center justify-content-between">
-              <h5 class="mb-0">Donasikan</h5>
+              <h5 class="mb-0">IREDA</h5>
               <small class="text-danger float-end">* wajib diisi</small>
             </div>
             <div class="card-body">

@@ -17,7 +17,7 @@ class BayarDonasiController extends Controller
 
     public function create(Donasi $donasi)
     {
-        $action = route('donasirw.bayardonasi.store',$donasi->slug);
+        $action = route('ireda.iuran.store',$donasi->slug);
         return view('donasi.bayar',compact('donasi','action'));
     }
 
@@ -44,7 +44,7 @@ class BayarDonasiController extends Controller
             $request['user_id']         = auth()->user()->id;
             BayarDonasi::create($request->except(['_token','thumb']));
             DB::commit();
-            return redirect()->route('donasirw.bayardonasi.index',$donasi->slug)->with('success','Berhasil berdonasi '.$donasi->judul.' silahkan menunggu verifikasi admin');
+            return redirect()->route('ireda.iuran.index',$donasi->slug)->with('success','Berhasil berdonasi '.$donasi->judul.' silahkan menunggu verifikasi admin');
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([
@@ -56,7 +56,7 @@ class BayarDonasiController extends Controller
 
     public function bukti_index(Donasi $donasi, BayarDonasi $bayardonasi)
     {
-        $action = route('donasirw.bayardonasi.bukti.store',[$donasi->slug, $bayardonasi->id]);
+        $action = route('ireda.iuran.bukti.store',[$donasi->slug, $bayardonasi->id]);
         return view('donasi.bukti',compact('action','donasi'));
     }
 
@@ -75,7 +75,7 @@ class BayarDonasiController extends Controller
             $request['file']    = $request->file('thumb')->store('bukti-pembayaran','public');
             BayarDonasi::where('id',$bayardonasi->id)->update($request->except(['_token','thumb']));
             DB::commit();
-            return redirect()->route('donasirw.bayardonasi.index',$donasi->slug)->with('success','Berhasil upload bukti berdonasi '.$donasi->judul.' silahkan menunggu verifikasi admin');
+            return redirect()->route('ireda.iuran.index',$donasi->slug)->with('success','Berhasil upload bukti berdonasi '.$donasi->judul.' silahkan menunggu verifikasi admin');
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([
@@ -93,7 +93,7 @@ class BayarDonasiController extends Controller
                 'is_verified'    => true,
             ]);
             DB::commit();
-            return redirect()->route('donasirw.index')->with('success','Berhasil menyetujui donasi '.$bayardonasi->bayar->name.' untuk '.$donasi->judul);
+            return redirect()->route('ireda.index')->with('success','Berhasil menyetujui donasi '.$bayardonasi->bayar->name.' untuk '.$donasi->judul);
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([

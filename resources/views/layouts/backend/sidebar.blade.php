@@ -215,7 +215,7 @@
             auth()->user()->can('Tani RW Access')
         )
             <!-- Diskusi -->
-            <li class="menu-item {{ (request()->segment(1) == 'lokerrw' || request()->segment(1) == 'forumrw' || request()->segment(1) == 'tanirw' || request()->segment(1) == 'rwdonasi') ? 'open' : '' }}">
+            <li class="menu-item {{ (request()->segment(1) == 'lokerrw' || request()->segment(1) == 'forumrw' || request()->segment(1) == 'forumpengurusrw' || request()->segment(1) == 'tanirw' || request()->segment(1) == 'rwdonasi') ? 'open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ri-discuss-line"></i>
                     <div data-i18n="Diskusi">Diskusi</div>
@@ -236,24 +236,49 @@
                         </li>
                     @endif
 
+                    @if (auth()->user()->can('Forum RW Access'))
+                        @if (auth()->user()->hasRole('Warga'))
+                            <li class="menu-item {{ request()->segment(1) == 'forumrw' ? 'active' : '' }}">
+                                <a href="{{ route('forumrw.index') }}" class="menu-link">
+                                <div data-i18n="Forum RW">Forum RW</div>
+                                </a>
+                            </li>
+                        @else
+                            <li class="menu-item {{ (request()->segment(1) == 'forumrw' || request()->segment(1) == 'forumpengurusrw') ? 'open' : '' }}">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div data-i18n="Forum RW">Forum RW</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item {{ request()->segment(1) == 'forumrw' ? 'active' : '' }}">
+                                        <a href="{{ route('forumrw.index') }}" class="menu-link">
+                                        <div data-i18n="Warga">Warga</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item {{ request()->segment(1) == 'forumpengurusrw' ? 'active' : '' }}">
+                                        <a href="{{ route('forumrw.pengurus.index') }}" class="menu-link">
+                                        <div data-i18n="Pengurus">Pengurus</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                    @endif
 
-                    <li class="menu-item">
-                        <a href="#" class="menu-link">
-                        <div data-i18n="Forum RW">Forum RW</div>
-                        </a>
-                    </li>
+                    @if (auth()->user()->can('Tani RW Access'))
+                        <li class="menu-item">
+                            <a href="#" class="menu-link">
+                            <div data-i18n="Tani RW">Tani RW</div>
+                            </a>
+                        </li>
+                    @endif
 
-                    <li class="menu-item">
-                        <a href="#" class="menu-link">
-                        <div data-i18n="Tani RW">Tani RW</div>
-                        </a>
-                    </li>
-
-                    <li class="menu-item">
-                        <a href="#" class="menu-link">
-                        <div data-i18n="RW Donasi">RW Donasi</div>
-                        </a>
-                    </li>
+                    @if (auth()->user()->can('Donasi RW Access'))
+                        <li class="menu-item">
+                            <a href="#" class="menu-link">
+                            <div data-i18n="RW Donasi">RW Donasi</div>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif

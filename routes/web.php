@@ -98,6 +98,23 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
         });
     });
 
+    Route::prefix('forumrw')->group(function () {
+        route::get('/saya',[App\Http\Controllers\ForumController::class, 'saya'])->name('forum.saya');
+    });
+
+    Route::prefix('forumpengurusrw')->group(function () {
+        Route::get('/',[App\Http\Controllers\ForumController::class, 'index_pengurus'])->name('forumrw.pengurus.index');
+        route::get('/saya',[App\Http\Controllers\ForumController::class, 'saya_pengurus'])->name('forum.pengurus.saya');
+        Route::get('/create',[App\Http\Controllers\ForumController::class, 'create_pengurus'])->name('forumrw.pengurus.create');
+        Route::post('/store',[App\Http\Controllers\ForumController::class, 'store_pengurus'])->name('forumrw.pengurus.store');
+        Route::prefix('{forumrw}')->group(function () {
+            Route::get('/',[App\Http\Controllers\ForumController::class, 'show_pengurus'])->name('forumrw.pengurus.show');
+            Route::get('/edit',[App\Http\Controllers\ForumController::class, 'edit_pengurus'])->name('forumrw.pengurus.edit');
+            Route::put('/update',[App\Http\Controllers\ForumController::class, 'update_pengurus'])->name('forumrw.pengurus.update');
+            Route::delete('/destroy',[App\Http\Controllers\ForumController::class, 'destroy_pengurus'])->name('forumrw.pengurus.destroy');
+        });
+    });
+
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::resource('roles', App\Http\Controllers\RoleController::class);
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
@@ -110,4 +127,5 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
     Route::resource('laporrw', App\Http\Controllers\LaporRwController::class);
     Route::resource('tanyarw', App\Http\Controllers\TanyaRwController::class);
     Route::resource('lokerrw', App\Http\Controllers\LokerRwController::class);
+    Route::resource('forumrw', App\Http\Controllers\ForumController::class);
 });

@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-    {{ $berita->judul }} - Digitalisasi Desa
+    {{ $forum->judul }} - Digitalisasi Desa
 @endsection
 
 @section('content')
@@ -17,9 +17,9 @@
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="{{ route('berita.index') }}">Daftar Berita</a>
+                <a href="{{ route('forumrw.index') }}">Daftar Forum RW</a>
             </li>
-            <li class="breadcrumb-item active">{{ $berita->judul }}</li>
+            <li class="breadcrumb-item active">{{ $forum->judul }}</li>
         </ol>
     </nav>
 </div>
@@ -28,7 +28,7 @@
     <div class="col-12">
       <div class="card mb-6">
         <div class="user-profile-header-banner">
-          <img src="{{ asset('storage/'.$berita->image) }}" alt="Thumbnail Berita {{ $berita->judul }}" class="rounded-top" />
+          <img src="{{ asset('storage/'.$forum->image) }}" alt="Thumbnail Forum {{ $forum->judul }}" class="rounded-top" />
         </div>
         <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-5">
           <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
@@ -41,19 +41,19 @@
             <div
               class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-5 flex-md-row flex-column gap-6">
               <div class="user-profile-info">
-                <h4 class="mb-2">{{ $berita->pembuat->name }}</h4>
+                <h4 class="mb-2">{{ $forum->pembuat->name }}</h4>
                 <ul
                   class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4">
                   <li class="list-inline-item">
-                    <i class="ri-book-shelf-line me-2 ri-24px"></i><span class="fw-medium">{{ $berita->kategori->judul }}</span>
+                    <i class="ri-eye-line me-2 ri-24px"></i><span class="fw-medium"></span>
                   </li>
                   <li class="list-inline-item">
                     <i class="ri-calendar-line me-2 ri-24px"></i
-                    ><span class="fw-medium"> {{ \Carbon\Carbon::parse($berita->published_at)->isoFormat('DD-MMMM-YYYY') }}</span>
+                    ><span class="fw-medium"> {{ \Carbon\Carbon::parse($forum->published_at)->isoFormat('DD-MMMM-YYYY') }}</span>
                   </li>
                 </ul>
               </div>
-              <a href="{{ route('berita.index') }}" class="btn btn-danger">
+              <a href="{{ (isset($flag)) ? route('forumrw.pengurus.index') : route('forumrw.index') }}" class="btn btn-danger">
                 <i class="ri-arrow-left-line ri-16px me-2"></i>Kembali
               </a>
             </div>
@@ -65,11 +65,11 @@
         <div class="card">
             <div class="card-header align-items-center">
                 <h5 class="card-action-title mb-0">
-                  {{ $berita->judul }}
+                  {{ $forum->judul }}
                 </h5>
             </div>
             <div class="card-body">
-                {!! $berita->deskripsi !!}
+                {!! $forum->deskripsi !!}
             </div>
         </div>
     </div>

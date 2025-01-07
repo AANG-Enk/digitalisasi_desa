@@ -180,68 +180,83 @@
                         </li>
                     @endif
 
+                    @if (auth()->user()->can('Lapor RW Access'))
+                        <li class="menu-item {{ request()->segment(1) == 'laporrw' ? 'active' : '' }}">
+                            <a href="{{ route('laporrw.index') }}" class="menu-link">
+                            <div data-i18n="Lapor RW">Lapor RW</div>
+                            </a>
+                        </li>
+                    @endif
 
-                    <li class="menu-item {{ request()->segment(1) == 'laporrw' ? 'active' : '' }}">
-                        <a href="{{ route('laporrw.index') }}" class="menu-link">
-                        <div data-i18n="Lapor RW">Lapor RW</div>
-                        </a>
-                    </li>
+                    @if (auth()->user()->can('Tanya RW Access'))
+                        <li class="menu-item {{ request()->segment(1) == 'tanyarw' ? 'active' : '' }}">
+                            <a href="{{ route('tanyarw.index') }}" class="menu-link">
+                            <div data-i18n="Tanya RW">Tanya RW</div>
+                            </a>
+                        </li>
+                    @endif
 
-                    <li class="menu-item {{ request()->segment(1) == 'tanyarw' ? 'active' : '' }}">
-                        <a href="{{ route('tanyarw.index') }}" class="menu-link">
-                        <div data-i18n="Tanya RW">Tanya RW</div>
-                        </a>
-                    </li>
-
-                    <li class="menu-item {{ request()->segment(1) == 'surveirw' ? 'active' : '' }}">
-                        <a href="{{ route('surveirw.index') }}" class="menu-link">
-                        <div data-i18n="Survei RW">Survei RW</div>
-                        </a>
-                    </li>
+                    @if (auth()->user()->can('Survei RW Access'))
+                        <li class="menu-item {{ request()->segment(1) == 'surveirw' ? 'active' : '' }}">
+                            <a href="{{ route('surveirw.index') }}" class="menu-link">
+                            <div data-i18n="Survei RW">Survei RW</div>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
 
         @endif
 
-        <!-- Diskusi -->
-        {{-- <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons ri-discuss-line"></i>
-                <div data-i18n="Diskusi">Diskusi</div>
-            </a>
+        @if (
+            auth()->user()->can('Loker RW Access') ||
+            auth()->user()->can('Forum RW Access') ||
+            auth()->user()->can('Donasi RW Access') ||
+            auth()->user()->can('Tani RW Access')
+        )
+            <!-- Diskusi -->
+            <li class="menu-item {{ (request()->segment(1) == 'lokerrw' || request()->segment(1) == 'forumrw' || request()->segment(1) == 'tanirw' || request()->segment(1) == 'rwdonasi') ? 'open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ri-discuss-line"></i>
+                    <div data-i18n="Diskusi">Diskusi</div>
+                </a>
 
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Sehat RW">Sehat RW</div>
-                    </a>
-                </li>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                        <div data-i18n="Sehat RW">Sehat RW</div>
+                        </a>
+                    </li>
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Loker RW">Loker RW</div>
-                    </a>
-                </li>
+                    @if (auth()->user()->can('Loker RW Access'))
+                        <li class="menu-item {{ request()->segment(1) == 'lokerrw' ? 'active' : '' }}">
+                            <a href="{{ route('lokerrw.index') }}" class="menu-link">
+                            <div data-i18n="Loker RW">Loker RW</div>
+                            </a>
+                        </li>
+                    @endif
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Forum RW">Forum RW</div>
-                    </a>
-                </li>
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Tani RW">Tani RW</div>
-                    </a>
-                </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                        <div data-i18n="Forum RW">Forum RW</div>
+                        </a>
+                    </li>
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="RW Donasi">RW Donasi</div>
-                    </a>
-                </li>
-            </ul>
-        </li> --}}
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                        <div data-i18n="Tani RW">Tani RW</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                        <div data-i18n="RW Donasi">RW Donasi</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
 
         <!-- Solusi -->
         {{-- <li class="menu-item">

@@ -109,4 +109,5 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
 
     Route::resource('laporrw', App\Http\Controllers\LaporRwController::class);
     Route::resource('tanyarw', App\Http\Controllers\TanyaRwController::class);
+    Route::resource('lokerrw', App\Http\Controllers\LokerRwController::class);
 });

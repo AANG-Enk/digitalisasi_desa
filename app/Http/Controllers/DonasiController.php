@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Donasi;
+use App\Models\BayarDonasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
@@ -14,8 +15,16 @@ class DonasiController extends Controller
      */
     public function index()
     {
-        $list_donasi = Donasi::with('pembuat')->withSum('bayars', 'nominal')->whereNull('deleted_at')->orderBy('created_at','DESC')->get();
-        return view('donasi.index',compact('list_donasi'));
+        if(auth()->user()->hasRole('Warga')){
+            $list_donasi = Donasi::with('pembuat')->withSum('bayars', 'nominal')->whereNull('deleted_at')->orderBy('created_at','DESC')->paginate(9);
+            return view('donasi.warga',compact('list_donasi'));
+        }else{
+            $list_donasi = Donasi::with('pembuat')->withSum(['bayars' => function($q){
+                $q->where('is_verified',true);
+            }], 'nominal')->whereNull('deleted_at')->orderBy('created_at','DESC')->get();
+            $list_bayar = BayarDonasi::with('donasi','bayar')->whereNull('deleted_at')->orderBy('created_at','DESC')->get();
+            return view('donasi.index',compact('list_donasi','list_bayar'));
+        }
     }
 
     /**

@@ -115,6 +115,19 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
         });
     });
 
+    Route::prefix('donasirw')->group(function () {
+        Route::prefix('{donasi:slug}')->group(function () {
+            Route::get('/daftar',[App\Http\Controllers\BayarDonasiController::class, 'index'])->name('donasirw.bayardonasi.index');
+            Route::get('/donasikan',[App\Http\Controllers\BayarDonasiController::class, 'create'])->name('donasirw.bayardonasi.create');
+            Route::post('/donasikan',[App\Http\Controllers\BayarDonasiController::class, 'store'])->name('donasirw.bayardonasi.store');
+            Route::prefix('{bayardonasi}/bukti')->group(function () {
+                Route::get('/',[App\Http\Controllers\BayarDonasiController::class, 'bukti_index'])->name('donasirw.bayardonasi.bukti.index');
+                Route::post('/',[App\Http\Controllers\BayarDonasiController::class, 'bukti_store'])->name('donasirw.bayardonasi.bukti.store');
+                Route::post('/verifikasi',[App\Http\Controllers\BayarDonasiController::class, 'verifikasi'])->name('donasirw.bayardonasi.verifikasi');
+            });
+        });
+    });
+
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::resource('roles', App\Http\Controllers\RoleController::class);
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);

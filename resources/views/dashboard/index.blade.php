@@ -1,5 +1,9 @@
 @extends('layouts.backend.main')
 
+@section('vendorcss')
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/swiper/swiper.css') }}" />
+@endsection
+
 @section('title')
     Dashboard - Digitalisasi Desa
 @endsection
@@ -8,7 +12,7 @@
 <div class="row g-6">
 
     <!-- Gamification Card -->
-    <div class="col-md-12 col-xxl-8">
+    <div class="col-md-12 col-xxl-12">
         <div class="card">
             <div class="d-flex align-items-end row">
                 <div class="col-md-6 order-2 order-md-1">
@@ -33,6 +37,32 @@
         </div>
     </div>
     <!--/ Gamification Card -->
-
 </div>
+@endsection
+
+@section('vendorjs')
+<script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
+@endsection
+
+@section('pagejs')
+    <script>
+        $(document).ready(function(){
+
+            const swiperMarketingPagination = document.querySelector('#swiper-marketing-sales');
+            if (swiperMarketingPagination) {
+                new Swiper(swiperMarketingPagination, {
+                loop: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false
+                },
+                pagination: {
+                    clickable: true,
+                    el: '.swiper-pagination'
+                }
+                });
+            }
+
+        })
+    </script>
 @endsection

@@ -104,10 +104,10 @@ class PermissionRolesSeeder extends Seeder
             'Survei RW Pertanyaan Update|Administrator|RW',
             'Survei RW Pertanyaan Delete|Administrator|RW',
 
-            'Survei RW Jawaban Access|Administrator|Warga|RW',
+            'Survei RW Jawaban Access|Administrator|Warga',
             'Survei RW Jawaban Create|Administrator|Warga',
 
-            'Loker RW Access|Administrator|RW|Warga',
+            'Loker RW Access|Administrator|RW',
             'Loker RW Create|Administrator|RW',
             'Loker RW Update|Administrator|RW',
             'Loker RW Delete|Administrator|RW',
@@ -118,9 +118,12 @@ class PermissionRolesSeeder extends Seeder
             'Forum RW Delete|Administrator|RW|Warga',
 
             'Donasi RW Access|Administrator|RW|Warga',
-            'Donasi RW Create|Administrator|RW|Warga',
-            'Donasi RW Update|Administrator|RW|Warga',
-            'Donasi RW Delete|Administrator|RW|Warga',
+            'Donasi RW Create|Administrator|RW',
+            'Donasi RW Update|Administrator|RW',
+            'Donasi RW Delete|Administrator|RW',
+            'Donasi RW Verifikasi|Administrator|RW',
+            'Donasi RW Setor|Administrator|Warga',
+            'Donasi RW Bukti|Administrator|Warga',
 
             'Tani RW Access|Administrator|RW|Warga',
             'Tani RW Create|Administrator|RW',

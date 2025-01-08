@@ -15,8 +15,13 @@ class TaniRwController extends Controller
      */
     public function index()
     {
-        $list_tani = TaniRw::with('pembuat')->whereNull('deleted_at')->orderBy('published_at','DESC')->get();
-        return view('tanirw.index',compact('list_tani'));
+        if(auth()->user()->hasRole('Warga')){
+            $list_tani = TaniRw::with('pembuat')->whereNull('deleted_at')->orderBy('published_at','DESC')->paginate(9);
+            return view('tanirw.warga',compact('list_tani'));
+        }else{
+            $list_tani = TaniRw::with('pembuat')->whereNull('deleted_at')->orderBy('published_at','DESC')->get();
+            return view('tanirw.index',compact('list_tani'));
+        }
     }
 
     /**

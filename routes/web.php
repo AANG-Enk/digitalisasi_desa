@@ -20,6 +20,13 @@ Route::get('/', function () {
 Route::middleware(['web','auth','verified','banned'])->group(function () {
     Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
+    Route::prefix('profile')->group(function () {
+        Route::get('/',[App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+        Route::post('/',[App\Http\Controllers\ProfileController::class, 'store'])->name('profile.store');
+        Route::post('/upload',[App\Http\Controllers\ProfileController::class,'upload'])->name('profile.upload');
+        Route::get('/settings',[App\Http\Controllers\ProfileController::class, 'setting'])->name('profile.setting');
+    });
+
     Route::prefix('users/{users}')->group(function () {
         Route::get('/banned',[App\Http\Controllers\UserController::class, 'banned'])->name('users.banned');
         Route::get('/unbanned',[App\Http\Controllers\UserController::class, 'unbanned'])->name('users.unbanned');

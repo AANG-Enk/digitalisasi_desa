@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('name');
-
-            // Dokumen
             $table->char('nik',16)->nullable()->unique();
             $table->char('kk',16)->nullable();
             $table->text('alamat')->nullable();
@@ -31,7 +29,7 @@ return new class extends Migration
             $table->string('status_pernikahan')->nullable();
             $table->boolean('ketua_rt')->default(false);
             $table->boolean('ketua_rw')->default(false);
-
+            $table->string('foto',255)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

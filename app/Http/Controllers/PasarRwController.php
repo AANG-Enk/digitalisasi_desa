@@ -15,8 +15,13 @@ class PasarRwController extends Controller
      */
     public function index()
     {
-        $list_pasar = PasarRw::whereNull('deleted_at')->orderBy('created_at','DESC')->get();
-        return view('pasar.index',compact('list_pasar'));
+        if(auth()->user()->hasRole('Warga')){
+            $list_pasar = PasarRw::whereNull('deleted_at')->orderBy('created_at','DESC')->paginate(9);
+            return view('pasar.warga',compact('list_pasar'));
+        }else{
+            $list_pasar = PasarRw::whereNull('deleted_at')->orderBy('created_at','DESC')->get();
+            return view('pasar.index',compact('list_pasar'));
+        }
     }
 
     /**

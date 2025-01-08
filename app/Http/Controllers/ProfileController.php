@@ -93,4 +93,10 @@ class ProfileController extends Controller
             ], 500);
         }
     }
+
+    public function setting()
+    {
+        $action = route('user-password.update');
+        return view('profile.setting',compact('action'));
+    }
 }

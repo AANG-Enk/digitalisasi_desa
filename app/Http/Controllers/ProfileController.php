@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -98,5 +101,32 @@ class ProfileController extends Controller
     {
         $action = route('user-password.update');
         return view('profile.setting',compact('action'));
+    }
+
+    public function upload(Request $request)
+    {
+        $user = auth()->user();
+        if(!is_null($user->foto)){
+            Storage::delete($user->foto);
+        }
+
+        try {
+            $image = $request->image;  // your base64 encoded
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $imageName = uniqid() . '.png';
+            File::put(storage_path('app/public/foto') . '/' . $imageName, base64_decode($image));
+
+            $data['foto'] = 'foto/' . $imageName;
+
+            User::where('id',$user->id)->update($data);
+
+            Session::flash('success', 'Profile Photo has been updated!');
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'    => false,
+                'message'   => $th->getMessage(),
+            ], 500);
+        }
     }
 }

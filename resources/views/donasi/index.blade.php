@@ -1,7 +1,7 @@
 @extends('layouts.backend.main')
 
 @section('title')
-    Daftar Donasi RW - Digitalisasi Desa
+    Daftar IREDA - Digitalisasi Desa
 @endsection
 
 @section('vendorcss')
@@ -18,7 +18,7 @@
           <li class="breadcrumb-item">
             <a href="{{ route('dashboard') }}">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Daftar Donasi RW</li>
+          <li class="breadcrumb-item active">Daftar IREDA</li>
         </ol>
     </nav>
 </div>
@@ -45,7 +45,7 @@
                         data-bs-target="#navs-justified-home"
                         aria-controls="navs-justified-home"
                         aria-selected="true">
-                        <span class="d-none d-sm-block"><i class="tf-icons ri-home-smile-line me-2"></i> Donasi</span>
+                        <span class="d-none d-sm-block"><i class="tf-icons ri-home-smile-line me-2"></i> IREDA</span>
                         <i class="ri-home-smile-line ri-20px d-sm-none"></i>
                     </button>
                 </li>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="my-3 d-flex justify-content-center gap-2">
                     @can('Donasi RW Create')
-                        <a href="{{ route('ireda.create') }}" class="btn btn-primary">Tambah Donasi RW</a>
+                        <a href="{{ route('ireda.create') }}" class="btn btn-primary">Tambah IREDA</a>
                     @endcan
                 </div>
             </div>

@@ -15,11 +15,12 @@ class LaporRwController extends Controller
     public function index()
     {
         if(auth()->user()->hasRole('Warga')){
-            $list_lapor_rw = LaporRw::with('pelapor')->where('user_id',auth()->user()->id)->whereNull('deleted_at')->orderBy('created_at','DESC')->get();
+            $list_lapor_rw = LaporRw::with('pelapor')->where('user_id',auth()->user()->id)->whereNull('deleted_at')->orderBy('created_at','DESC')->paginate(9);
+            return view('laporrw.warga',compact('list_lapor_rw'));
         }else{
             $list_lapor_rw = LaporRw::with('pelapor')->whereNull('deleted_at')->orderBy('created_at','DESC')->get();
+            return view('laporrw.index',compact('list_lapor_rw'));
         }
-        return view('laporrw.index',compact('list_lapor_rw'));
     }
 
     /**

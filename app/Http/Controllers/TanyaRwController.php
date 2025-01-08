@@ -16,7 +16,9 @@ class TanyaRwController extends Controller
         if(auth()->user()->hasRole('Warga')){
             $list_tanya_rw = TanyaRw::where('user_id',auth()->user()->id)->whereNull('deleted_at')->orderBy('created_at','ASC')->get();
             $item_tanya_rw = TanyaRw::whereNull('warga_text')->where([['user_id',auth()->user()->id],['is_read',false]])->latest()->first();
-            $item_tanya_rw->update(['is_read' => true]);
+            if(!is_null($item_tanya_rw)){
+                $item_tanya_rw->update(['is_read' => true]);
+            }
             $action = route('tanyarw.store');
             return view('tanyarw.detail',compact('list_tanya_rw','action'));
         }else{
@@ -74,7 +76,9 @@ class TanyaRwController extends Controller
     {
         $list_tanya_rw = TanyaRw::where('user_id',$tanyarw->user_id)->whereNull('deleted_at')->orderBy('created_at','ASC')->get();
         $item_tanya_rw = TanyaRw::whereNull('rw_text')->where('user_id',$tanyarw->user_id)->latest()->first();
-        $item_tanya_rw->update(['is_read' => true]);
+        if(!is_null($item_tanya_rw)){
+            $item_tanya_rw->update(['is_read' => true]);
+        }
         $action = route('tanyarw.update',$tanyarw->id);
         return view('tanyarw.detail',compact('list_tanya_rw','action','tanyarw'));
     }

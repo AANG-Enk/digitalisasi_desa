@@ -16,8 +16,13 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        $list_berita = Berita::with('pembuat','kategori')->whereNull('deleted_at')->orderBy('published_at','DESC')->get();
-        return view('berita.index',compact('list_berita'));
+        if(auth()->user()->hasRole('Warga')){
+            $list_berita = Berita::with('pembuat','kategori')->whereNull('deleted_at')->orderBy('published_at','DESC')->paginate(12);
+            return view('berita.warga',compact('list_berita'));
+        }else{
+            $list_berita = Berita::with('pembuat','kategori')->whereNull('deleted_at')->orderBy('published_at','DESC')->get();
+            return view('berita.index',compact('list_berita'));
+        }
     }
 
     /**

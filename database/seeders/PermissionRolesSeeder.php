@@ -107,7 +107,7 @@ class PermissionRolesSeeder extends Seeder
             'Survei RW Jawaban Access|Administrator|Warga',
             'Survei RW Jawaban Create|Administrator|Warga',
 
-            'Loker RW Access|Administrator|RW',
+            'Loker RW Access|Administrator|RW|Warga',
             'Loker RW Create|Administrator|RW',
             'Loker RW Update|Administrator|RW',
             'Loker RW Delete|Administrator|RW',
@@ -129,6 +129,16 @@ class PermissionRolesSeeder extends Seeder
             'Tani RW Create|Administrator|RW',
             'Tani RW Update|Administrator|RW',
             'Tani RW Delete|Administrator|RW',
+
+            'Pasar RW Access|Administrator|RW|Warga',
+            'Pasar RW Create|Administrator|RW',
+            'Pasar RW Update|Administrator|RW',
+            'Pasar RW Delete|Administrator|RW',
+
+            'Iklan RW Access|Administrator|RW',
+            'Iklan RW Create|Administrator|RW',
+            'Iklan RW Update|Administrator|RW',
+            'Iklan RW Delete|Administrator|RW',
         ];
 
         foreach($list_permission as $val){

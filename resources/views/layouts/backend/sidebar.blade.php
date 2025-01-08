@@ -283,33 +283,42 @@
             </li>
         @endif
 
-        <!-- Solusi -->
-        {{-- <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons ri-lightbulb-flash-line"></i>
-                <div data-i18n="Solusi">Solusi</div>
-            </a>
+        @if (
+            auth()->user()->can('Pasar RW Access') ||
+            auth()->user()->can('IKlan RW Access')
+        )
 
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="RW Mart">RW Mart</div>
-                    </a>
-                </li>
+            <!-- Solusi -->
+            <li class="menu-item {{ (request()->segment(1) == 'pasarrw' || request()->segment(1) == 'adsrw') ? 'open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ri-lightbulb-flash-line"></i>
+                    <div data-i18n="Solusi">Solusi</div>
+                </a>
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Ads RW">Ads RW</div>
-                    </a>
-                </li>
+                <ul class="menu-sub">
+                    @if (auth()->user()->can('Pasar RW Access'))
+                        <li class="menu-item {{ request()->segment(1) == 'pasarrw' ? 'active' : '' }}">
+                            <a href="{{ route('pasarrw.index') }}" class="menu-link">
+                            <div data-i18n="Pasar RW">Pasar RW</div>
+                            </a>
+                        </li>
+                    @endif
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <div data-i18n="Mitra BUMRW">Mitra BUMRW</div>
-                    </a>
-                </li>
-            </ul>
-        </li> --}}
+                    @if (auth()->user()->can('Iklan RW Access'))
+                        <li class="menu-item {{ request()->segment(1) == 'adsrw' ? 'active' : '' }}">
+                            <a href="{{ route('adsrw.index') }}" class="menu-link">
+                            <div data-i18n="Ads RW">Ads RW</div>
+                            </a>
+                        </li>
+                    @endif
 
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                        <div data-i18n="Mitra BUMRW">Mitra BUMRW</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
     </ul>
 </aside>

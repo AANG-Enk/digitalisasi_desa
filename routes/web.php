@@ -143,4 +143,6 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
     Route::resource('forumrw', App\Http\Controllers\ForumController::class);
     Route::resource('tanirw', App\Http\Controllers\TaniRwController::class);
     Route::resource('ireda', App\Http\Controllers\DonasiController::class);
+    Route::resource('pasarrw', App\Http\Controllers\PasarRwController::class);
+    Route::resource('adsrw', App\Http\Controllers\IklanRwController::class);
 });

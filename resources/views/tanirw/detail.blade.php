@@ -32,10 +32,17 @@
         </div>
         <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-5">
           <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-            <img
-              src="{{ asset('assets/img/avatars/1.png') }}"
-              alt="user image"
-              class="d-block h-auto ms-0 ms-sm-5 rounded-4 user-profile-img" />
+            @if (!is_null($tanirw->pembuat->foto))
+                <img
+                src="{{ asset('storage/'.$tanirw->pembuat->foto) }}"
+                alt="user image"
+                class="d-block h-auto ms-0 ms-sm-5 rounded-4 user-profile-img" />
+            @else
+                <img
+                src="{{ asset('assets/img/logo/logo.png') }}"
+                alt="user image"
+                class="d-block h-auto ms-0 ms-sm-5 rounded-4 user-profile-img" />
+            @endif
           </div>
           <div class="flex-grow-1 mt-4 mt-sm-12">
             <div

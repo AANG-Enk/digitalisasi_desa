@@ -16,7 +16,7 @@
 
     <title>Homepage {{ config('app.name') }}</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content="Mewujudkan Aplikasi Edisi Baru(Edukasi, Diskusi, Solusi Barudak RW Satu): Digitalisasi Data Kependudukan di Kantor RW.01 Kelurahan Babakan" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />

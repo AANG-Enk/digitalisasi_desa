@@ -6,7 +6,7 @@
             <img src="{{ asset('assets/img/logo/logo.svg') }}" alt="Logo Digitalisasi Desa" style="max-width: 50px;">
           </span>
         </span>
-        <span class="app-brand-text demo menu-text fw-semibold ms-2">DiDesa</span>
+        <span class="app-brand-text demo menu-text fw-semibold ms-2">EDISI</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">

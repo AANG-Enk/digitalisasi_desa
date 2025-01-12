@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Donasi;
-use App\Models\IklanRW;
+use App\Models\IklanRw;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller

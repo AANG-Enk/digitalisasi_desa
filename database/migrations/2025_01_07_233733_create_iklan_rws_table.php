@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('judul',255);
             $table->string('slug',255)->unique();
             $table->string('image',255);
+            $table->text('deskripsi');
             $table->date('start');
             $table->date('end');
             $table->string('link')->nullable();

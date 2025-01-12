@@ -24,6 +24,7 @@ class IklanRw extends Model
         'end',
         'link',
         'hubungi',
+        'deskripsi',
         'deleted_at',
     ];
 

@@ -168,6 +168,9 @@ class DataWargaController extends Controller
             'file.max'      => 'File Excel Maximal 1mb',
         ]);
 
+        ini_set('max_execution_time', '0');
+		ini_set('memory_limit', '-1');
+
         Excel::import(new DataWargaMultipleSheetImport, $request->file('file'));
         return redirect()->route('datawarga.index')->with('success','Berhasil mengimport data warga file excel');
     }

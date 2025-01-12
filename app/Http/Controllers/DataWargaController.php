@@ -171,8 +171,15 @@ class DataWargaController extends Controller
         ini_set('max_execution_time', '0');
 		ini_set('memory_limit', '-1');
 
-        Excel::import(new DataWargaMultipleSheetImport, $request->file('file'));
-        return redirect()->route('datawarga.index')->with('success','Berhasil mengimport data warga file excel');
+        try {
+            Excel::import(new DataWargaMultipleSheetImport, $request->file('file'));
+            return redirect()->route('datawarga.index')->with('success','Berhasil mengimport data warga file excel');
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'    => false,
+                'message'   => $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function pilih_rt(User $user)

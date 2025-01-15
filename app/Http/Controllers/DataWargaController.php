@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExcelImportProgres;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 use App\Imports\DataWargaMultipleSheetImport;
+use App\Imports\DataWargaImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DataWargaController extends Controller
@@ -172,14 +176,57 @@ class DataWargaController extends Controller
 		ini_set('memory_limit', '-1');
 
         try {
+            $totalRows = count(Excel::toArray(new DataWargaImport, $request->file('file'), null, \Maatwebsite\Excel\Excel::XLSX)[0]);
+
+            ExcelImportProgres::updateOrCreate([
+                'key'   => 'DATA WARGA'
+            ],[
+                'total_rows' => $totalRows-2,
+                'processed_rows' => 0,
+            ]);
             Excel::import(new DataWargaMultipleSheetImport, $request->file('file'));
-            return redirect()->route('datawarga.index')->with('success','Berhasil mengimport data warga file excel');
-        } catch (\Exception $e) {
+
             return response()->json([
-                'status'    => false,
-                'message'   => $e->getMessage(),
-            ], 500);
+                'success'       => true,
+                'status'        => 'Mohon Tunggu... Sedang Melakukan Import Data',
+            ]);
+
+            //UPLOAD FILE
+            // $file = $request->file('file');
+            // $jobId = uniqid('import_');
+            // $filename = time() . '.' . $file->getClientOriginalExtension();
+            // $file->storeAs('temp', $filename, 'public');
+
+            // dispatch(new ImportDataWargaJob(storage_path('app/public/temp/'.$filename),$jobId));
+
+            // Cache::put('import_total_rows', 0);
+            // $total_rows = count(Excel::toArray([], $file)[0])-2;
+            // Cache::put('import_total_rows', $total_rows);
+
+            // Cache::put('import_progress', 0);
+            // Excel::import(new DataWargaMultipleSheetImport, $file);
+        } catch (\Exception $e) {
+            Log::error('Error: ' . $e->getMessage(), $e->getTrace());
+            return response()->json([
+                'success'       => false,
+                'status'        => 'Gagal Import, Silahkan ulangi kembali atau kontak admin.',
+                'pesan'         => $e->getMessage(),
+            ]);
         }
+    }
+
+    public function checkImportStatus()
+    {
+        $progress = ExcelImportProgres::where('key','DATA WARGA')->first();
+
+        if (!$progress) {
+            return response()->json(['message' => 'No import in progress'], 404);
+        }
+
+        return response()->json([
+            'total' => $progress->total_rows,
+            'processed' => $progress->processed_rows,
+        ]);
     }
 
     public function pilih_rt(User $user)

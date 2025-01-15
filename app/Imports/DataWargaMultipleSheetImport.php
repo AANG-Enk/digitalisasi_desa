@@ -9,7 +9,7 @@ class DataWargaMultipleSheetImport implements WithMultipleSheets
     public function sheets(): array
     {
         return [
-            0 => new DataWargaImport(), // Index 0 untuk sheet pertama
+            0 => new DataWargaImport(),
         ];
     }
 }

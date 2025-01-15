@@ -40,6 +40,7 @@ Route::middleware(['web','auth','verified','banned'])->group(function () {
     Route::prefix('datawarga')->group(function () {
         Route::get('import',[App\Http\Controllers\DataWargaController::class, 'import_index'])->name('datawarga.import.index');
         Route::post('import',[App\Http\Controllers\DataWargaController::class, 'import_store'])->name('datawarga.import.store');
+        Route::get('import/status',[App\Http\Controllers\DataWargaController::class, 'checkImportStatus'])->name('datawarga.import.status');
 
         Route::post('{user}/pilih_rt',[App\Http\Controllers\DataWargaController::class, 'pilih_rt'])->name('datawarga.pilih.rt');
         Route::post('{user}/pilih_rw',[App\Http\Controllers\DataWargaController::class, 'pilih_rw'])->name('datawarga.pilih.rw');

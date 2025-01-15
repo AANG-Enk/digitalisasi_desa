@@ -137,14 +137,12 @@
                         pesanContainter.show();
                     },
                     success: function(data){
-                        console.log(data);
                         pesanText.text(data.status);
                         if(data.success){
                             showProgress();
                         }
                     },
                     error:function(err){
-                        console.log(err);
                         pesanText.text('Internal Server Error');
                     }
                 })

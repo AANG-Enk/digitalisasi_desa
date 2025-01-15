@@ -90,7 +90,7 @@
     <script>
         function calculatePercentage(totalRows, filledRows) {
             if (totalRows === 0) return 0; // Menghindari pembagian dengan nol
-            return (filledRows / totalRows) * 100;
+            return Math.round((filledRows / totalRows) * 100);
         }
 
         function showProgress(link){
@@ -106,7 +106,8 @@
                         progressBar.css('width', calculatePercentage(data.total, data.processed) + '%').text(calculatePercentage(data.total, data.processed) + '%');
                         if(data.total == data.processed){
                             clearInterval(interval);
-                            pesanText.html('Import Data Selesai. <a href="'+linkIndex+'">Klik Disini</a> untuk kembali ke halaman awal');
+                            // pesanText.html('Import Data Selesai. <a href="'+linkIndex+'">Klik Disini</a> untuk kembali ke halaman awal');
+                            window.location = linkIndex;
                         }
                     }
                 })

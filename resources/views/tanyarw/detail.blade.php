@@ -27,6 +27,8 @@
     </nav>
 </div>
 
+@if (!is_null($pak_rw))
+
 <div class="app-chat card overflow-hidden">
     <div class="row g-0">
       <!-- Chat History -->
@@ -113,6 +115,16 @@
         <div class="app-overlay"></div>
     </div>
 </div>
+
+@else
+
+<div class="row g-6">
+    <div class="col-12">
+        <h4 class="text-center">Anda Belum Melakukan Pemilihan Ketua RW</h4>
+    </div>
+</div>
+
+@endif
 
 @endsection
 

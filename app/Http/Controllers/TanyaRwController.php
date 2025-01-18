@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\TanyaRw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Jobs\SendTanyaRWNotification;
 
 class TanyaRwController extends Controller
 {
@@ -13,14 +15,15 @@ class TanyaRwController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->hasRole('Warga')){
+        if(auth()->user()->hasRole('Warga') && !auth()->user()->ketua_rw){
             $list_tanya_rw = TanyaRw::where('user_id',auth()->user()->id)->whereNull('deleted_at')->orderBy('created_at','ASC')->get();
             $item_tanya_rw = TanyaRw::whereNull('warga_text')->where([['user_id',auth()->user()->id],['is_read',false]])->latest()->first();
             if(!is_null($item_tanya_rw)){
                 $item_tanya_rw->update(['is_read' => true]);
             }
+            $pak_rw         = User::where([['rw', auth()->user()->rw],['ketua_rw',true]])->first();
             $action = route('tanyarw.store');
-            return view('tanyarw.detail',compact('list_tanya_rw','action'));
+            return view('tanyarw.detail',compact('list_tanya_rw','action','pak_rw'));
         }else{
             $list_tanya_rw = TanyaRw::with('pembuat')
                             ->whereNull('deleted_at')
@@ -55,9 +58,11 @@ class TanyaRwController extends Controller
 
         try {
             DB::beginTransaction();
+            $pak_rw                     = User::where([['rw', auth()->user()->rw],['ketua_rw',true]])->first();
             $request['user_id']         = auth()->user()->id;
             $request['warga_text']      = $request['text'];
-            TanyaRw::create($request->except(['_token','text']));
+            $tanya = TanyaRw::create($request->except(['_token','text']));
+            dispatch(new SendTanyaRWNotification($pak_rw, $request['text'], auth()->user()->name));
             DB::commit();
             return redirect()->route('tanyarw.index')->with('success','Berhasil megirim pesan ');
         } catch (\Throwable $th) {
@@ -79,8 +84,9 @@ class TanyaRwController extends Controller
         if(!is_null($item_tanya_rw)){
             $item_tanya_rw->update(['is_read' => true]);
         }
+        $pak_rw         = User::where([['rw', auth()->user()->rw],['ketua_rw',true]])->first();
         $action = route('tanyarw.update',$tanyarw->id);
-        return view('tanyarw.detail',compact('list_tanya_rw','action','tanyarw'));
+        return view('tanyarw.detail',compact('list_tanya_rw','action','tanyarw','pak_rw'));
     }
 
     /**
@@ -104,9 +110,11 @@ class TanyaRwController extends Controller
 
         try {
             DB::beginTransaction();
+            $user                       = User::where('id',$tanyarw->user_id)->first();
             $request['user_id']         = $tanyarw->user_id;
             $request['rw_text']         = $request['text'];
-            TanyaRw::create($request->except(['_token','text','_method']));
+            $tanya = TanyaRw::create($request->except(['_token','text','_method']));
+            dispatch(new SendTanyaRWNotification($user, $request['text'], auth()->user()->name));
             DB::commit();
             return redirect()->route('tanyarw.show',$tanyarw->id)->with('success','Berhasil megirim pesan ');
         } catch (\Throwable $th) {

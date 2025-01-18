@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,20 @@ Route::get('/', function () {
 });
 
 Route::middleware(['web','auth','verified','banned'])->group(function () {
+    Route::post('/notifications/read', function (Request $request) {
+        $notification = auth()->user()->notifications()->find($request->id);
+        if ($notification) {
+            $notification->markAsRead();
+        }
+        return redirect()->back();
+    })->name('notifications.read');
+
+    Route::post('/notifications/all/read',function(){
+        $user = auth()->user();
+        $user->unreadNotifications->markAsRead();
+        return redirect()->back();
+    })->name('notifications.read.all');
+
     Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('profile')->group(function () {

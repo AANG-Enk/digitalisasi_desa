@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\InfoRw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Jobs\SendInfoRWNotification;
 
 class InfoRwController extends Controller
 {
@@ -39,9 +41,17 @@ class InfoRwController extends Controller
             'judul.required'    => 'Judul Informasi harus diisi',
             'deskripsi.required'    => 'Keterangan Informasi harus diisi',
         ]);
+
+        ini_set('max_execution_time', '0');
+		ini_set('memory_limit', '-1');
+
         try {
             DB::beginTransaction();
-            InfoRw::create($request->except(['_token']));
+            $info   = InfoRw::create($request->except(['_token']));
+            User::chunk(200, function($users) use($info){
+                dispatch(new SendInfoRWNotification($users, $info));
+            });
+            // SendInfoRWNotification::dispatch($info->judul, $info->deskripsi, $info->slug);
             DB::commit();
             return redirect()->route('inforw.index')->with('success','Berhasil menambahkan informasi '.$request->judul);
         } catch (\Throwable $th) {
@@ -56,9 +66,10 @@ class InfoRwController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(InfoRw $inforw)
+    public function show($slug)
     {
-        //
+        $inforw = InfoRw::where('slug',$slug)->firstOrFail();
+        return view('inforw.detail',compact('inforw'));
     }
 
     /**

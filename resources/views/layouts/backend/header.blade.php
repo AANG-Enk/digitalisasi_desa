@@ -57,7 +57,7 @@
                             <li class="list-group-item list-group-item-action dropdown-notifications-item">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
-                                        <a href="{{ route('inforw.show',$notification->data['slug']) }}">
+                                        <a href="{{ $notification->data['link'] }}">
                                             <h6 class="small mb-1">{{ $notification->data['judul'] }}</h6>
                                             <small class="mb-1 d-block text-body">{{ $notification->data['deskripsi'] }}</small>
                                             <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>

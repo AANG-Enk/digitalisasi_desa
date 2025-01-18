@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="col-12 d-flex justify-content-end mt-4">
-        @if (!auth()->user()->hasRole('Warga'))
+        @if (auth()->user()->hasRole('RW') || auth()->user()->hasRole('Administrator'))
             <a href="{{ route('laporrw.dibaca',$laporrw->slug) }}" class="btn btn-success">Sudah Dibaca</a>
         @endif
     </div>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\LaporRw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Jobs\SendLaporRWNotification;
 
 class LaporRwController extends Controller
 {
@@ -14,9 +16,10 @@ class LaporRwController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->hasRole('Warga')){
-            $list_lapor_rw = LaporRw::with('pelapor')->where('user_id',auth()->user()->id)->whereNull('deleted_at')->orderBy('created_at','DESC')->paginate(9);
-            return view('laporrw.warga',compact('list_lapor_rw'));
+        if(auth()->user()->hasRole('Warga') && !auth()->user()->ketua_rw){
+            $list_lapor_rw  = LaporRw::with('pelapor')->where('user_id',auth()->user()->id)->whereNull('deleted_at')->orderBy('created_at','DESC')->paginate(9);
+            $pak_rw         = User::where([['rw', auth()->user()->rw],['ketua_rw',true]])->first();
+            return view('laporrw.warga',compact('list_lapor_rw','pak_rw'));
         }else{
             $list_lapor_rw = LaporRw::with('pelapor')->whereNull('deleted_at')->orderBy('created_at','DESC')->get();
             return view('laporrw.index',compact('list_lapor_rw'));
@@ -46,8 +49,10 @@ class LaporRwController extends Controller
         ]);
         try {
             DB::beginTransaction();
+            $pak_rw         = User::where([['rw', auth()->user()->rw],['ketua_rw',true]])->first();
             $request['user_id'] = auth()->user()->id;
-            LaporRw::create($request->except(['_token']));
+            $lapor = LaporRw::create($request->except(['_token']));
+            dispatch(new SendLaporRWNotification($pak_rw, $lapor));
             DB::commit();
             return redirect()->route('laporrw.index')->with('success','Berhasil menambahkan laporan '.$request->judul);
         } catch (\Throwable $th) {
@@ -62,8 +67,9 @@ class LaporRwController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(LaporRw $laporrw)
+    public function show($slug)
     {
+        $laporrw = LaporRw::where('slug',$slug)->firstOrFail();
         return view('laporrw.detail',compact('laporrw'));
     }
 

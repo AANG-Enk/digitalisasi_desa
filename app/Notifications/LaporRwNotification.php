@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 
-class InfoRWNotification extends Notification
+class LaporRwNotification extends Notification
 {
     use Queueable;
 
@@ -35,7 +35,7 @@ class InfoRWNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'link' => url('/inforw/'.$this->info->slug),
+            'link' => url('/laporrw/'.$this->info->slug),
             'judul' => $this->info->judul,
             'deskripsi' => Str::limit(strip_tags($this->info->deskripsi), 100, '...'),
         ];
@@ -49,7 +49,7 @@ class InfoRWNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'link' => url('/inforw/'.$this->info->slug),
+            'link' => url('/laporrw/'.$this->info->slug),
             'judul' => $this->info->judul,
             'deskripsi' => Str::limit(strip_tags($this->info->deskripsi), 100, '...'),
         ];

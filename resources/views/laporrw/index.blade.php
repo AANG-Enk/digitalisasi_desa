@@ -52,7 +52,7 @@
                         <td>{!! ($item->is_read)?'<span class="badge bg-success">Sudah Dibaca</span>':'<span class="badge bg-danger">Belum Dibaca</span>' !!}</td>
                         <td>
                             <div class="d-flex gap-1">
-                                <a href="{{ route('laporrw.show',$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Lihat Laporan {{ $item->judul }}" class="text-success"><i class="menu-icon tf-icons ri-eye-line"></i></a>
+                                <a href="{{ route('laporrw.show',$item->slug) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Lihat Laporan {{ $item->judul }}" class="text-success"><i class="menu-icon tf-icons ri-eye-line"></i></a>
                                 @if (!$item->is_read && auth()->user()->id == $item->user_id)
                                     @can('Lapor RW Update')
                                         <a href="{{ route('laporrw.edit',$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit {{ $item->judul }}" class="text-secondary"><i class="menu-icon tf-icons ri-edit-2-line"></i></a>

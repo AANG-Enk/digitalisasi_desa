@@ -84,7 +84,11 @@ class TanyaRwController extends Controller
         if(!is_null($item_tanya_rw)){
             $item_tanya_rw->update(['is_read' => true]);
         }
-        $pak_rw         = User::where([['rw', auth()->user()->rw],['ketua_rw',true]])->first();
+        if(auth()->user()->hasRole('Warga')){
+            $pak_rw         = User::where([['rw', auth()->user()->rw],['ketua_rw',true]])->first();
+        }else{
+            $pak_rw         = User::where([['rw',$tanyarw->pembuat->rw],['ketua_rw',true]])->first();
+        }
         $action = route('tanyarw.update',$tanyarw->id);
         return view('tanyarw.detail',compact('list_tanya_rw','action','tanyarw','pak_rw'));
     }
